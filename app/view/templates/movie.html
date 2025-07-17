@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/movie.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <title>Deniska Films</title>
+</head>
+
+<body>
+    <header>
+        <div class="upper-header">
+            <div class="nav container">
+                <div class="logo">Deniska <span id="films">Films</span></div>
+                <div class="search">
+                    <img src="{{ url_for('static', path='icons/search.svg') }}" alt="нема">
+                    <input type="text" placeholder="Пошук фільмів">
+                </div>
+                <nav></nav>
+            </div>
+        </div>
+        <div class="under-header">
+            <div class="content-type">
+                <ul>
+                    <li><a href="#" id="test">Фільми</a></li>
+                    <li><a href="#">Серіали</a></li>
+                    <li><a href="#">Мультфільми</a></li>
+                    <li><a href="#">Мультсеріали</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="main container">
+
+        <div class="info-block">
+            <img src="{{ poster_url }}" alt="нема">
+            <div class="rating">
+                <div class="rating-header">
+                    Рейтинг фільму
+                </div>
+                <div class="stars">
+                    <div class="stars-container">
+                        {% for _ in range(full_stars) %}
+                            <img src="{{ url_for('static', path='icons/star.svg') }}" alt="*">
+                        {% endfor %}
+                        {% if has_halfStar %}
+                            <img src="{{ url_for('static', path='icons/half_star.svg') }}" alt="*">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="rating-futer">Оцінка <span>{{ rating }} з 10</span></div>
+            </div>
+            <div class="line"></div>
+            <div class="movie-buttons">
+                <div class="button-section">
+                    <div class="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 20" fill="none">
+                            <path
+                                d="M3.70837 9.99983V7.03316C3.70837 3.34983 6.31671 1.8415 9.50837 3.68316L12.0834 5.1665L14.6584 6.64983C17.85 8.4915 17.85 11.5082 14.6584 13.3498L12.0834 14.8332L9.50837 16.3165C6.31671 18.1582 3.70837 16.6498 3.70837 12.9665V9.99983Z"
+                                stroke="white" stroke-width="1.4" stroke-miterlimit="10" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="button-text">Трейлер</div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="block">
+                <div class="type">
+                    Країна:
+                </div>
+                <div class="value">
+                    {% for country in countries%}
+                        <div class="info-item">
+                            <p>{{ country.name }}</p>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="block">
+                <div class="type">Час:</div>
+                <div class="value">{{ runtime }}</div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="block">
+                <div class="type">Дата релізу:</div>
+                <div class="value">
+                    <p>{{ movieDay }} {{movieMonth}}</p>
+                    <div class="info-item">
+                        <p>{{ movieYear }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="block">
+                <div class="type">Рейтинг:</div>
+                <div class="value">
+                    <div class="age-item">
+                        <p>{{ age_rating }}+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="movie-block">
+            <div class="movie-name-block">
+                <div class="movie-name">
+                    <h2>{{ title }}</h2>
+                </div>
+                <div class="movie-engname">
+                    <h3>{{ eng_title }}</h3>
+                </div>
+            </div>
+            <div class="video-player">
+                <div class="not-allowed">
+                    <img src="{{ url_for('static', path='gifs/no_content.gif') }}" alt="">
+                    <p>Цей контент не доступний у вашій країні(</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</body>
+
+</html>

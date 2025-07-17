@@ -1,0 +1,354 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #1D1E1F;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4 {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* центрування(margin: auto;) та надання розмуру головному центруючому контейнеру calc(100% - 400px) = 100% ширени екрану мінус по 225 пікселів зліва і зправа */
+.container {
+    width: calc(100% - 30%); /* можна відраховувати відстань ps: крта штука */
+    margin: 0 auto;
+}
+
+@media(max-width: 1100px) {
+    .container {
+        width: calc(100% - 5%);
+    }
+}
+
+header {
+    box-sizing: border-box;
+}
+
+/*Верхній хедер*/
+header .upper-header {
+    background-color: #252627;
+    width: 100%;
+    height: 80px;
+}
+
+.nav {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .upper-header .nav .logo {
+    font-family: "Paytone One", sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    color: #fff;
+}
+
+#films {
+    color: #00b8fc;
+}
+
+header .upper-header .nav .search {
+    display: flex;
+    align-items: center;
+    background-color: #303030;
+    height: 50px;
+    width: 500px;
+    border-radius: 50px;
+    padding: 0 20px;
+    transition: .2s;
+}
+
+header .upper-header .nav .search:hover {
+    border: solid 1px #00b8fc;
+}
+
+header .upper-header .nav  .search img {
+    margin-right: 5px;
+}
+
+header .upper-header .nav .search input {
+    color: #fff;
+    border: none;
+    height: 48px;
+    width: 430px;
+    background-color: #303030;
+}
+
+header .upper-header .nav nav {
+    height: 100%;
+}
+/*кінець верхньго хедера*/
+
+/*нижній хедер*/
+ header .under-header {
+    height: 48px;
+    background-color: #303030;
+ }
+
+.content-type {
+    width: calc(100% - 40%);
+    margin: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+header .under-header .content-type ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+header .under-header .content-type ul li {
+    font-family: "Paytone One", sans-serif;
+    margin: 0 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .under-header .content-type ul li a {
+    cursor: default;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    color: #525252;
+}
+
+/*не вcі вкладки готові*/
+/* header .under-header .content-type ul li a:hover {
+    color: #fff;
+    border-bottom: solid 1px #00b8fc;
+} */
+
+#test {
+    cursor: pointer;
+    color: #aeaeae;
+}
+
+#test:hover {
+    color: #fff;
+    border-bottom: solid 1px #00b8fc;
+}
+/*кінець нижнього хедера*/
+
+/*Головне тло*/
+.main {
+    display: flex;
+    padding-top: 24px;
+}
+
+/*блок з інфою про фільм*/
+.info-block {
+    
+    color: #fff;
+    border-radius: 8px;
+    background-color: #252627;
+    box-sizing: border-box;
+    max-width: 320px;
+    padding: 15px;
+    font-family: "Paytone One", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.info-block img {
+    max-width: 100%;
+}
+
+.info-block .rating .rating-header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.info-block .rating {
+    box-sizing: border-box;
+    max-height: 290px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+}
+
+.info-block .rating .rating-header {
+    margin-bottom: 8px;
+}
+
+.info-block .rating .stars .stars-container {
+    display: flex;
+    justify-content: center;
+}
+
+.info-block .rating .stars img {
+    width: 36px;
+    height: 36px;
+}
+
+.rating-futer {
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+}
+/*Лінія*/
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: #303030;
+}
+
+/*Кнопки*/
+.button-text {
+    margin-top: 6px;
+    color: #aeaeae;
+    font-size: 11px;
+    font-family: "Paytone One", sans-serif;
+}
+
+.info-block .movie-buttons {
+    padding: 24px 0;
+    justify-content: center;
+    display: flex;
+}
+
+.info-block .movie-buttons .button-section .button {
+    height: 48px;
+    width: 48px;
+    background-color: rgba(48, 48, 48, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s;
+}
+/*Кінець Кнопки*/
+
+.info-block .movie-buttons .button-section .button:hover {
+    background-color: #00b8fc;
+    scale: 1.05;
+}
+
+/*блоки з інфою про фільм*/
+.block {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.block .type {
+    font-size: 12px;
+    color: #aeaeae;
+    width: 98px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.block .value p{
+    margin-right: 5px;
+}
+
+.block .value {
+    display: flex;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+}
+/*кінець інфи про фільм*/
+
+/*Елемент інфи типу рамка для блока*/
+.info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #303030;
+    border-radius: 18px;
+    margin-right: 5px;
+    transition: .2s;
+}
+
+.info-item:hover {
+    background-color: #00b8fc;
+}
+
+.info-item p {
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+}
+/*кінець блока в рамці*/
+
+/*іконака рейтингу*/
+.age-item {
+    font-size: 13px;
+    color: #da2130;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    width: 40px;
+    height: 20px;
+    border: 1px solid #da2130;
+}
+/*Кінець блока про фільм ні головному тлі*/
+
+/*блок з фільмом на головномк тлі*/
+.movie-block {
+    /* background-color: #a05e5e38; */
+    padding-left: 32px;
+    width: 100%;
+}
+
+.movie-block .movie-name-block {
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+}
+
+.movie-block .movie-name-block {
+    margin-bottom: 12px;
+}
+
+.movie-name h2 {
+    font-size: 32px;
+}
+
+.movie-engname {
+    font-size: 16px;
+}
+
+.movie-block .video-player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: rgba(48,48,48,.45);
+}
+
+/*блок нема контенту*/
+.video-player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-allowed p{
+    margin: 0;
+    color: #aeaeae;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.not-allowed img {
+    height: 50%;
+    width: 100%;
+}
