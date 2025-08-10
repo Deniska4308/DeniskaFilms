@@ -31,7 +31,7 @@ movie_country = Table(
     Column('movie_id', ForeignKey('movie.id', ondelete="CASCADE"), primary_key=True),
     Column('country_id', ForeignKey('country.id', ondelete="CASCADE"), primary_key=True)
 )
-# 10/10 таблиць
+# 11/10 таблиць
 
 #фільм
 class Movie(Base):
@@ -80,7 +80,13 @@ class Movie(Base):
     )
     roles = relationship(
         'Role',
-        back_populates='movie',
+        back_populates='movies',
+        lazy='selectin'
+    )
+
+    dubbing = relationship(
+        'Dubbing',
+        back_populates='movies',
         lazy='selectin'
     )
 
@@ -156,5 +162,20 @@ class Role(Base):
     role_name = Column(String(64), nullable=False)
 
     #Звяʼзки
-    movie = relationship('Movie', back_populates='roles')
+    movies = relationship('Movie', back_populates='roles')
     actors = relationship('Actor', backref='roles')
+
+
+class Dubbing(Base):
+    __tablename__ = 'dubbing'
+
+    id = Column(Integer, nullable=False)
+    movie_id = Column(Integer, ForeignKey('movie.id', ondelete="CASCADE"), nullable=False, primary_key=True)
+    name = Column(String(64), nullable=False, primary_key=True)
+    dubble_lang = Column(String(8), nullable=False, index=True)
+    movie_url = Column(Text, nullable=True)
+
+    movies = relationship(
+        'Movie',
+        back_populates='dubbing'
+    )

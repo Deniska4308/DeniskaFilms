@@ -1,6 +1,6 @@
 from datetime import datetime, date
 
-def movieDatetime(date_obj: date):
+def movieDatetime(date_obj: date) -> list:
     "повертає з 1994-10-10 такого масив з [10, 'Жовтня', 1994]"
     months_ua = {
         1: "Cічня", 2: "Лютого", 3: "Березня", 4: "Квітня",

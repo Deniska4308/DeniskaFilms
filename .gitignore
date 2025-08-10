@@ -1,3 +1,7 @@
 .venv/
 .git/
 .idea/
+**/.DS_Store
+app/.env
+app/tests.py
+README.md
