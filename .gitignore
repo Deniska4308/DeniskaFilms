@@ -5,8 +5,5 @@
 app/.env
 app/tests.py
 README.md
-# Secrets
 .env
-.env*
-.evn
-.evn*
+.env.*
