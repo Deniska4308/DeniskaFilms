@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
-from models import Movie
+from app.models import Movie
 
 async def get_movie_by_id(db: AsyncSession, movie_id: int):
     """

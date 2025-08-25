@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import date
 
 def movieDatetime(date_obj: date) -> list:
     "повертає з 1994-10-10 такого масив з [10, 'Жовтня', 1994]"
@@ -16,6 +16,12 @@ def movieRuntime(runtime: int) -> str:
     return f"{hours} год {mins} хв"
 
 def movieStars(rating: int) -> list:
+    """
+    приймає ціле чисто від 1 до 10
+    і повертає скльки зірок має бути від половини до 5 цілих
+    [full_stars, has_halfStar]
+    [int, bool]
+    """
     full_stars = rating // 2
     has_halfStar = rating % 2 == 1
     return [full_stars, has_halfStar]

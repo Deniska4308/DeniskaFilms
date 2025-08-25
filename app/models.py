@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date, SmallInteger, Boolean, Table, ForeignKey, Text
 from sqlalchemy.orm import relationship
-from database import Base
+from app.database import Base
 from datetime import date
 
 #звʼязувальні таблиці

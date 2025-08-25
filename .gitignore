@@ -2,8 +2,9 @@
 .git/
 .idea/
 **/.DS_Store
-app/.env
+.env
 app/tests.py
 README.md
 .env
 .env.*
+__pycache__/
