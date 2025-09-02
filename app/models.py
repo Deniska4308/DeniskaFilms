@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, SmallInteger, Boolean, Table, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, Date, DateTime, SmallInteger, Boolean, Table, ForeignKey, Text, text, func
 from sqlalchemy.orm import relationship
 from app.database import Base
 from datetime import date
@@ -179,3 +179,15 @@ class Dubbing(Base):
         'Movie',
         back_populates='dubbing'
     )
+
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, nullable=False, primary_key=True, index=True)
+    username = Column(String(526), nullable=False, index=True)
+    role = Column(Text, nullable=False, server_default=text("'guest'"), default="guest")
+    email = Column(String(254), unique=True, nullable=True)
+    password_hash = Column(Text, nullable=False)
+    birth_date = Column(Date, nullable=True)
+    profile_img = Column(Text, nullable=True)
+    created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())

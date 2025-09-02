@@ -7,7 +7,9 @@ from app.crud.movie import get_movie_by_id
 from app.utils.webSite import movieDatetime, movieRuntime, movieStars
 from urllib.parse import urljoin
 
-router = APIRouter()
+router = APIRouter(
+    tags=["page"]
+)
 
 
 @router.get("/movie/{movie_id}", response_class=HTMLResponse)

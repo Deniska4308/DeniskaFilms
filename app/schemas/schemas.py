@@ -3,7 +3,6 @@ from datetime import date
 from typing import Optional
 from typing import List
 
-
 class Movie(BaseModel):
     id: int
     title: str
@@ -18,7 +17,7 @@ class Movie(BaseModel):
     background_poster: Optional[str]
     created_at: Optional[date]
 
-class Actor(BaseModel):
+class ActorOut(BaseModel):
     id: int
     name: str
     true_name: str
@@ -27,6 +26,12 @@ class Actor(BaseModel):
 
     class Config:
         from_attributes = True
+
+class ActorIn(BaseModel):
+    name: str
+    true_name: str
+    birth_date: date | None = None
+    photo_url: str | None = None
 
 class Director(BaseModel):
     id: int
@@ -57,7 +62,7 @@ class Role(BaseModel):
 #=================================Додаткові таблиці==================================
 #для повної інфи про фільм
 class MovieDetail(Movie):
-    actors: List[Actor]
+    actors: List[ActorOut]
     directors: List[Director]
     countries: List[Country]
 
