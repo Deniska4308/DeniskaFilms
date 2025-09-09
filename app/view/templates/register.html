@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/deniska_filmsBase.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/register.css') }}">
+    <title>Реэстрація | DeniskaFilms</title>
+</head>
+
+<body>
+    <header>
+        <div class="upper-header">
+            <div class="nav container">
+                <div class="logo">Deniska <span id="films">Films</span></div>
+                <div class="search">
+                    <img src="static/icons/search.svg" alt="нема">
+                    <input type="text" placeholder="Пошук фільмів">
+                </div>
+                <nav></nav>
+            </div>
+        </div>
+        <div class="under-header">
+            <div class="content-type">
+                <ul>
+                    <li><a href="#" id="test">Фільми</a></li>
+                    <li><a href="#">Серіали</a></li>
+                    <li><a href="#">Мультфільми</a></li>
+                    <li><a href="#">Мультсеріали</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+
+        <div class="register-form">
+            <h1>Реєстрація</h1>
+            <p>Вітаємо Вас на мошому сайті!</p>
+            <form action="" id="registerForm" method="post" class="flex-column">
+                <div class="input-div"><input type="text" name="" id="mail" class="auth-input-base" placeholder="Пошта"></div>
+                <div class="input-div"><input type="text" name="" id="username" class="auth-input-base" placeholder="Нікнейм" required></div>
+                <div class="input-div"><input type="password" name="" id="password" class="auth-input-base password-input-hiden translateY" placeholder="Пароль" required>
+                    <div class="show-password-btn" id="show-password-btn">
+                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" class="pass-icon show-password-icon"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16.0799 11.9999C16.0799 13.9799 14.4799 15.5799 12.4999 15.5799C10.5199 15.5799 8.91992 13.9799 8.91992 11.9999C8.91992 10.0199 10.5199 8.41992 12.4999 8.41992C14.4799 8.41992 16.0799 10.0199 16.0799 11.9999Z"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M12.5001 20.27C16.0301 20.27 19.3201 18.19 21.6101 14.59C22.5101 13.18 22.5101 10.81 21.6101 9.39997C19.3201 5.79997 16.0301 3.71997 12.5001 3.71997C8.97009 3.71997 5.68009 5.79997 3.39009 9.39997C2.49009 10.81 2.49009 13.18 3.39009 14.59C5.68009 18.19 8.97009 20.27 12.5001 20.27Z"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="pass-icon hide-password-icon" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.5299 9.46992L9.46992 14.5299C8.81992 13.8799 8.41992 12.9899 8.41992 11.9999C8.41992 10.0199 10.0199 8.41992 11.9999 8.41992C12.9899 8.41992 13.8799 8.81992 14.5299 9.46992Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M17.8198 5.76998C16.0698 4.44998 14.0698 3.72998 11.9998 3.72998C8.46984 3.72998 5.17984 5.80998 2.88984 9.40998C1.98984 10.82 1.98984 13.19 2.88984 14.6C3.67984 15.84 4.59984 16.91 5.59984 17.77"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M8.41992 19.5299C9.55992 20.0099 10.7699 20.2699 11.9999 20.2699C15.5299 20.2699 18.8199 18.1899 21.1099 14.5899C22.0099 13.1799 22.0099 10.8099 21.1099 9.39993C20.7799 8.87993 20.4199 8.38993 20.0499 7.92993"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M15.5104 12.7C15.2504 14.11 14.1004 15.26 12.6904 15.52" stroke="currentColor"
+                                stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M9.47 14.53L2 22" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M22.0003 2L14.5303 9.47" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                </div>
+                <div class="input-div"><input type="password" name="" id="acept-password" class="auth-input-base password-input-hiden translateY" placeholder="Повторіть пароль" required>
+                    <div class="show-password-btn" id="show-acept-password-btn">
+                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" class="pass-icon show-password-icon"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16.0799 11.9999C16.0799 13.9799 14.4799 15.5799 12.4999 15.5799C10.5199 15.5799 8.91992 13.9799 8.91992 11.9999C8.91992 10.0199 10.5199 8.41992 12.4999 8.41992C14.4799 8.41992 16.0799 10.0199 16.0799 11.9999Z"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M12.5001 20.27C16.0301 20.27 19.3201 18.19 21.6101 14.59C22.5101 13.18 22.5101 10.81 21.6101 9.39997C19.3201 5.79997 16.0301 3.71997 12.5001 3.71997C8.97009 3.71997 5.68009 5.79997 3.39009 9.39997C2.49009 10.81 2.49009 13.18 3.39009 14.59C5.68009 18.19 8.97009 20.27 12.5001 20.27Z"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="pass-icon hide-password-icon" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.5299 9.46992L9.46992 14.5299C8.81992 13.8799 8.41992 12.9899 8.41992 11.9999C8.41992 10.0199 10.0199 8.41992 11.9999 8.41992C12.9899 8.41992 13.8799 8.81992 14.5299 9.46992Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M17.8198 5.76998C16.0698 4.44998 14.0698 3.72998 11.9998 3.72998C8.46984 3.72998 5.17984 5.80998 2.88984 9.40998C1.98984 10.82 1.98984 13.19 2.88984 14.6C3.67984 15.84 4.59984 16.91 5.59984 17.77"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M8.41992 19.5299C9.55992 20.0099 10.7699 20.2699 11.9999 20.2699C15.5299 20.2699 18.8199 18.1899 21.1099 14.5899C22.0099 13.1799 22.0099 10.8099 21.1099 9.39993C20.7799 8.87993 20.4199 8.38993 20.0499 7.92993"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M15.5104 12.7C15.2504 14.11 14.1004 15.26 12.6904 15.52" stroke="currentColor"
+                                stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M9.47 14.53L2 22" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M22.0003 2L14.5303 9.47" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                </div>
+
+
+                <div class="agree">
+                    <div class="checkbox-wrap"><input type="checkbox" class="agree-checkbox-auth" id="agree_rules"></div>
+                    <label for="agree_rules">Погоджуюсь з <a href="#">Правилами користування</a></label>
+                </div>
+                <button type="submit" class="auth-acept-base register-acept">Зареєструватся</button>
+            </form>
+        </div>
+
+    </div>
+    <script src="static/js/register.js"></script>
+</body>
+
+</html>

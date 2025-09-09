@@ -11,9 +11,8 @@ router = APIRouter(
     tags=["page"]
 )
 
-
 @router.get("/movie/{movie_id}", response_class=HTMLResponse)
-async def movie_page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = Depends(get_db)):
+async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = Depends(get_db)):
     base_url = "http://127.0.0.1:8000"
     movie = await get_movie_by_id(db, movie_id)
     if not movie:
@@ -22,7 +21,7 @@ async def movie_page_by_movie_id(movie_id: int, request: Request, db: AsyncSessi
     movieDay, movieMonth, movieYear = movieDatetime(movie.release_date)
     full_stars, has_halfStar = movieStars(movie.deniska_rating)
 
-    return templates.TemplateResponse("movie.html", {"request": request,
+    return templates.TemplateResponse("devmovie.html", {"request": request,
                                                      "title": movie.title,
                                                      "eng_title": movie.original_title,
                                                      "rating": movie.deniska_rating,
@@ -34,5 +33,15 @@ async def movie_page_by_movie_id(movie_id: int, request: Request, db: AsyncSessi
                                                      "runtime": movieRuntime(movie.runtime),
                                                      "full_stars": full_stars,
                                                      "has_halfStar": has_halfStar,
-                                                     "countries": movie.countries
+                                                     "countries": movie.countries,
+                                                     "description": movie.description,
+                                                     "genres": movie.genres
                                                      })
+
+@router.get("/login", response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
+
+@router.get("/register", response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse("register.html", {"request": request})

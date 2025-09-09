@@ -1,24 +1,6 @@
-body {
-    display: flex;
-    flex-direction: column;
-    background-color: #1D1E1F;
-    margin: 0;
-    padding: 0;
-}
-
-h1, h2, h3, h4 {
-    padding: 0;
-    margin: 0;
-}
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-/* центрування(margin: auto;) та надання розмуру головному центруючому контейнеру calc(100% - 400px) = 100% ширени екрану мінус по 225 пікселів зліва і зправа */
 .container {
-    width: calc(100% - 30%); /* можна відраховувати відстань ps: крта штука */
+    width: calc(100% - 40%);
+    /* можна відраховувати відстань ps: крута штука */
     margin: 0 auto;
 }
 
@@ -28,122 +10,12 @@ a {
     }
 }
 
-header {
-    box-sizing: border-box;
+/*треба більш прлавніше*/
+@media(max-width: 1800px) {
+    .container {
+        width: calc(100% - 20%);
+    }
 }
-
-/*Верхній хедер*/
-header .upper-header {
-    background-color: #252627;
-    width: 100%;
-    height: 80px;
-}
-
-.nav {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header .upper-header .nav .logo {
-    font-family: "Paytone One", sans-serif;
-    font-size: 25px;
-    font-weight: 400;
-    color: #fff;
-}
-
-#films {
-    color: #00b8fc;
-}
-
-header .upper-header .nav .search {
-    display: flex;
-    align-items: center;
-    background-color: #303030;
-    height: 50px;
-    width: 500px;
-    border-radius: 50px;
-    padding: 0 20px;
-    transition: .2s;
-}
-
-header .upper-header .nav .search:hover {
-    border: solid 1px #00b8fc;
-}
-
-header .upper-header .nav  .search img {
-    margin-right: 5px;
-}
-
-header .upper-header .nav .search input {
-    color: #fff;
-    border: none;
-    height: 48px;
-    width: 430px;
-    background-color: #303030;
-}
-
-header .upper-header .nav nav {
-    height: 100%;
-}
-/*кінець верхньго хедера*/
-
-/*нижній хедер*/
- header .under-header {
-    height: 48px;
-    background-color: #303030;
- }
-
-.content-type {
-    width: calc(100% - 40%);
-    margin: auto;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-header .under-header .content-type ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    height: 100%;
-}
-
-header .under-header .content-type ul li {
-    font-family: "Paytone One", sans-serif;
-    margin: 0 12px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-header .under-header .content-type ul li a {
-    cursor: default;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    color: #525252;
-}
-
-/*не вcі вкладки готові*/
-/* header .under-header .content-type ul li a:hover {
-    color: #fff;
-    border-bottom: solid 1px #00b8fc;
-} */
-
-#test {
-    cursor: pointer;
-    color: #aeaeae;
-}
-
-#test:hover {
-    color: #fff;
-    border-bottom: solid 1px #00b8fc;
-}
-/*кінець нижнього хедера*/
 
 /*Головне тло*/
 .main {
@@ -153,14 +25,12 @@ header .under-header .content-type ul li a {
 
 /*блок з інфою про фільм*/
 .info-block {
-    
     color: #fff;
     border-radius: 8px;
     background-color: #252627;
-    box-sizing: border-box;
     max-width: 320px;
+    height: 870px;
     padding: 15px;
-    font-family: "Paytone One", sans-serif;
     font-size: 14px;
     font-weight: 400;
 }
@@ -190,6 +60,12 @@ header .under-header .content-type ul li a {
 .info-block .rating .stars .stars-container {
     display: flex;
     justify-content: center;
+    margin-bottom: 8px;
+}
+
+/*для відступів зірок*/
+.info-block .rating .stars img:not(:last-child) {
+    margin-left: 5px;
 }
 
 .info-block .rating .stars img {
@@ -198,10 +74,17 @@ header .under-header .content-type ul li a {
 }
 
 .rating-futer {
+    font-size: 14px;
     padding: 0 32px;
     display: flex;
     justify-content: space-between;
 }
+
+.rating-futer span {
+    font-size: 14px;
+    font-weight: normal;
+}
+
 /*Лінія*/
 .line {
     width: 100%;
@@ -233,6 +116,7 @@ header .under-header .content-type ul li a {
     align-items: center;
     transition: .2s;
 }
+
 /*Кінець Кнопки*/
 
 .info-block .movie-buttons .button-section .button:hover {
@@ -254,7 +138,7 @@ header .under-header .content-type ul li a {
     font-family: "Open Sans", sans-serif;
 }
 
-.block .value p{
+.block .value p {
     margin-right: 5px;
 }
 
@@ -263,6 +147,7 @@ header .under-header .content-type ul li a {
     font-size: 12px;
     font-family: "Open Sans", sans-serif;
 }
+
 /*кінець інфи про фільм*/
 
 /*Елемент інфи типу рамка для блока*/
@@ -286,6 +171,7 @@ header .under-header .content-type ul li a {
     font-size: 12px;
     font-family: "Open Sans", sans-serif;
 }
+
 /*кінець блока в рамці*/
 
 /*іконака рейтингу*/
@@ -300,6 +186,7 @@ header .under-header .content-type ul li a {
     height: 20px;
     border: 1px solid #da2130;
 }
+
 /*Кінець блока про фільм ні головному тлі*/
 
 /*блок з фільмом на головномк тлі*/
@@ -318,18 +205,20 @@ header .under-header .content-type ul li a {
     margin-bottom: 12px;
 }
 
-.movie-name h2 {
+.movie-name h3 {
     font-size: 32px;
+
 }
 
 .movie-engname {
     font-size: 16px;
+    font-weight: 400;
 }
 
 .movie-block .video-player {
     width: 100%;
     aspect-ratio: 16/9;
-    background-color: rgba(48,48,48,.45);
+    background-color: rgba(48, 48, 48, .45);
 }
 
 /*блок нема контенту*/
@@ -339,7 +228,7 @@ header .under-header .content-type ul li a {
     align-items: center;
 }
 
-.not-allowed p{
+.not-allowed p {
     margin: 0;
     color: #aeaeae;
     font-size: 14px;
@@ -351,4 +240,154 @@ header .under-header .content-type ul li a {
 .not-allowed img {
     height: 50%;
     width: 100%;
+}
+
+/*блок жанрів під плеєром*/
+.main .movie-block .movie-genre {
+    display: flex;
+    padding: 20px 0;
+}
+
+/*для жанрів*/
+.main .movie-block .movie-genre .info-item {
+    padding: 0 18px;
+    margin-right: 8px;
+}
+
+/*текст для жанрів*/
+.main .movie-block .movie-genre .info-item p {
+    color: #fff;
+    font-size: 14px;
+    margin: 0;
+}
+
+/*пустий блок під жанрами*/
+.empty {
+    padding: 25px;
+}
+
+/*опис фільму*/
+.main .movie-block .description {
+    font-size: 16px;
+    color: #aeaeae;
+    text-align: justify;
+    padding: 20px 0;
+    line-height: 25.6px;
+}
+
+.main .movie-block .actors-block {
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/*блоки режисерів та акторів*/
+.main .movie-block .actors-block div.title {
+    color: #aeaeae;
+    margin-bottom: 8px;
+}
+
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+}
+
+.movie-block .actors-block .actors {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    transition: max-height 0.3s ease;
+}
+
+/*плитка актора і режисера*/
+.actor-item .actor-img img {
+    max-height: 84px;
+    border-radius: 8px 0 0 8px;
+}
+
+.actor-item {
+    display: flex;
+    flex-direction: row;
+    background-color: #252627;
+    height: 84px;
+    min-width: 0;
+    border-radius: 8px;
+}
+
+.actor-item .actor-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 4px;
+    box-sizing: border-box;
+}
+
+/*хитро миудрі марджени для полів у картосках акторів*/
+.actor-item .actor-info span {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.actor-item .actor-info span:not(:first-child) {
+    color: #aeaeae;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 2px 0;
+}
+
+.actor-item .actor-info span:last-child {
+    color: #fff;
+    margin-top: 0;
+}
+/* кнопка показати ще */
+.show-all-button {
+    font-size: 16px;
+    font-weight: 400;
+    color: #aeaeae;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 8px;
+    height: 48px;
+    max-width: 190px;
+    background-color: #252627;
+    display: flex;
+    flex-direction: row;
+    padding: 0 24px;
+    align-items: center;
+    border-radius: 24px;
+    transition: .2s ;
+}
+
+.show-all-button:hover {
+    color: #fff;
+    background-color: #00b8fc;
+}
+
+.show-all-button .icon {
+    margin-left: 2px;
+    position: relative;
+    bottom: -2px;
+}
+
+.icon-svg {
+    transition: transform 0.3s ease;
+}
+
+.rotated {
+    transform: rotate(180deg);
+}
+
+/*спроба сховати акторів*/
+.collapsed {
+    max-height: calc(84px * 2 + 8px); /* обмежує висоту до 2 рядків */
+    overflow: hidden;
+}
+
+.expanded {
+  max-height: 9999px; /* "розгорнутий" стан — показує все */
 }

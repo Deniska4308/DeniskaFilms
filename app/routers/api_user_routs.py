@@ -11,7 +11,7 @@ router = APIRouter(
 )
 
 @router.get("/{user_id}", response_model=UserDB)
-async def get_movie_by_UserId(user_id: int, db: AsyncSession = Depends(get_db)):
+async def get_user_by_UserId(user_id: int, db: AsyncSession = Depends(get_db)):
     user_data = await get_user_by_id(db, user_id)
     if not user_data:
         raise HTTPException(status_code=404, detail="User not found.")

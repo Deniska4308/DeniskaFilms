@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from datetime import date, datetime
+from typing import Literal
 # from typing import Optional
 from typing import List
 
@@ -33,3 +34,7 @@ class UserOut(UserBase):
     """
     class Config:
         from_attributes = True
+
+class TokenOut(BaseModel):
+    access_token: str
+    token_type: Literal["bearer"] = "bearer"

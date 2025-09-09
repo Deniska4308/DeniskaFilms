@@ -1,0 +1,266 @@
+/* Загальне для теми */
+:root { color-scheme: dark; } /* підказка браузеру для нативних контролів */
+
+/* Chrome / Edge / Safari */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #e5e7eb;        /* колір тексту */
+  box-shadow: 0 0 0 1000px #303030 inset;  /* ЗАЛИВАЄМО фон темним */           /* якщо треба бордер */
+  transition: background-color 9999s ease-out 0s; /* прибирає “мигання” білого */
+}
+
+/* Firefox */
+input:-moz-autofill {
+  box-shadow: 0 0 0 1000px #303030 inset;
+  -moz-text-fill-color: #e5e7eb;
+}
+
+/* центрування(margin: auto;) та надання розмуру головному центруючому контейнеру calc(100% - 400px) = 100% ширени екрану мінус по 225 пікселів зліва і зправа */
+.container {
+    width: calc(100% - 40%);
+    /* можна відраховувати відстань ps: крута штука */
+    margin: 0 auto;
+}
+
+/*для вирівнювання колонами*/
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/*--------------------головні стилі для------------------------------*/
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #1D1E1F;
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+header {
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+/*Верхній хедер*/
+header .upper-header {
+    background-color: #252627;
+    width: 100%;
+    height: 70px;
+}
+
+.nav {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .upper-header .nav .logo {
+    font-family: "Paytone One", sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    color: #fff;
+}
+
+#films {
+    color: #00b8fc;
+}
+
+header .upper-header .nav .search {
+    display: flex;
+    align-items: center;
+    background-color: #303030;
+    height: 50px;
+    width: 500px;
+    border-radius: 50px;
+    padding: 0 20px;
+    transition: .2s;
+}
+
+header .upper-header .nav .search:hover {
+    border: solid 1px #00b8fc;
+}
+
+header .upper-header .nav .search img {
+    margin-right: 5px;
+}
+
+header .upper-header .nav .search input {
+    color: #fff;
+    border: none;
+    height: 48px;
+    width: 430px;
+    background-color: #303030;
+}
+
+header .upper-header .nav nav {
+    height: 100%;
+}
+
+/*кінець верхньго хедера*/
+
+/*нижній хедер*/
+header .under-header {
+    height: 45px;
+    background-color: #303030;
+}
+
+.content-type {
+    width: calc(100% - 40%);
+    margin: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+header .under-header .content-type ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+header .under-header .content-type ul li {
+    font-family: "Paytone One", sans-serif;
+    margin: 0 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .under-header .content-type ul li a {
+    cursor: default;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    color: #525252;
+}
+
+/*не вcі вкладки готові*/
+/* header .under-header .content-type ul li a:hover {
+    color: #fff;
+    border-bottom: solid 1px #00b8fc;
+} */
+
+#test {
+    cursor: pointer;
+    color: #aeaeae;
+}
+
+#test:hover {
+    color: #fff;
+    border-bottom: solid 1px #00b8fc;
+}
+/*кінець нижнього хедера*/
+
+/*--------------------стилі для сторінок логінів і реєстрацій------------------------------*/
+
+/*базові стилі для інпута*/
+.auth-input-base {
+    height: 55px;
+    background-color: #303030;
+    border: 0;
+    width: 100%;
+    outline: 0;
+    font-family: "Open Sans", sans-serif;
+    color: #cecece;
+    
+}
+
+.auth-input-base[type="text"] {
+    font-size: 15px;
+}
+
+.auth-input-base[type="text"]::placeholder {
+    color: #aeaeae;
+    font-size: 15px;
+    font-family: "Open Sans", sans-serif;
+}
+.auth-input-base[type="text"]:focus {
+    color: #fff;
+}
+
+/*додаткові стилі для базових інпутів но для паролів додатково*/
+.password-input-hiden[type="password"] {
+    font-size: 24px; /*для великих крапок*/
+}
+
+.password-input-hiden[type="password"]::placeholder {
+    font-size: 15px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    transform: translateY(-2px);
+}
+
+/*чекбокс для прийнняття правил*/
+.agree-checkbox-auth[type="checkbox"] {
+    height: 18px;
+    width: 18px;
+    accent-color: #00b8fc;
+    margin-right: 8px;
+    outline: 0;
+    border: solid 1px #fff;
+}
+
+.agree-checkbox-auth[type="checkbox"]:checked {
+    background-color: #00b8fc;
+}
+
+/*база для кнопки реєстрації | логіну*/
+.auth-acept-base {
+    background-color: #00b8fc;
+    border: 0;
+    height: 48px;
+    font-size: 18px;
+    border-radius: 24px;
+    padding: 0 32px;
+    font-weight: 500;
+    transition: .2s
+}
+/*анімація для ацепт кнопки*/
+.auth-acept-base:hover {
+    box-shadow: #00b8fc 0px 10px 20px -10px;
+    transform: translateY(-2px)
+}
+
+/*іконка біля пароля для його показу*/
+.show-password-btn {
+    padding-left: 8px;
+    display: inline-block;
+}
+
+.pass-icon {
+    width: 24px;
+    height: 24px;
+    display: none;
+    color: #aeaeae;
+    transition: .2s;
+}
+
+.pass-icon:hover {
+    color: #fff;
+}
+
+.show-password-btn.show .show-password-icon { display: none; }
+.show-password-btn.show .hide-password-icon { display: inline; }
+.show-password-btn:not(.show) .show-password-icon { display: inline; }

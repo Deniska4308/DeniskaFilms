@@ -18,7 +18,8 @@ async def get_movie_by_id(db: AsyncSession, movie_id: int):
         .options(
             selectinload(Movie.actors),
             selectinload(Movie.directors),
-            selectinload(Movie.countries)
+            selectinload(Movie.countries),
+            selectinload(Movie.genres)
         )
         .where(Movie.id == movie_id)
     )
