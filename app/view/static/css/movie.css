@@ -315,6 +315,12 @@
     height: 84px;
     min-width: 0;
     border-radius: 8px;
+    transition: .2;
+}
+
+.actor-item:hover {
+    box-shadow: rgb(0, 0, 0) 0px 0px 8px 0px;
+    cursor: pointer;
 }
 
 .actor-item .actor-info {

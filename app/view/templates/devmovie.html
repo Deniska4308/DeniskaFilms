@@ -150,15 +150,26 @@
             <div class="actors-block">
                 <div class="title">Режисери:</div>
                 <div class="actors" id="directors">
-
-                    <div class="actor-item">
-                        <div class="actor-img"><img src="{{ url_for('static', path='directors/nophoto_woman.svg') }}" alt=""></div>
-                        <div class="actor-info text-overflow">
-                            <span class="text-overflow">Джейн-Енн Тенггрен</span>
-                            <span class="text-overflow">Jayne-Ann Tenggren </span>
-                            <span class="text-overflow"></span>
+                    {% for director in directors %}
+                        <div class="actor-item">
+                            <div class="actor-img">
+                                {% if not director.photo_url %}
+                                {% if director.is_female %}
+                                    <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_woman.svg') }}" alt=""></div>
+                                {% else %}
+                                    <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_man.svg') }}" alt=""></div>
+                                {% endif %}
+                                {% else %}
+                                    <div class="actor-img"><img src="{{ base_url }}/static/directors/{{ director.photo_url }}" alt=""></div>
+                                {% endif %}
+                            </div>
+                            <div class="actor-info text-overflow">
+                                <span class="text-overflow">{{ director.name }}</span>
+                                <span class="text-overflow">{{ director.true_name }}</span>
+                                <span class="text-overflow"></span>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
 
                 </div>
             </div>
@@ -168,15 +179,26 @@
             <div class="actors-block">
                 <div class="title" id="actors-test">Актори:</div>
                 <div class="actors collapsed" id="actors">
-
-                    <div class="actor-item">
-                        <div class="actor-img"><img src="{{ url_for('static', path='directors/nophoto_woman.svg') }}" alt=""></div>
-                        <div class="actor-info text-overflow">
-                            <span class="text-overflow">Джейн-Енн Тенггрен</span>
-                            <span class="text-overflow">Jayne-Ann Tenggren </span>
-                            <span class="text-overflow">55 років</span>
+                    {% for actor in actors %}
+                        <div class="actor-item">
+                            <div class="actor-img">
+                                {% if not actor.photo_url %}
+                                    {% if actor.is_female %}
+                                        <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_woman.svg') }}" alt=""></div>
+                                    {% else %}
+                                        <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_man.svg') }}" alt=""></div>
+                                    {% endif %}
+                                {% else %}
+                                    <div class="actor-img"><img src="{{ base_url }}/static/actors/{{ actor.photo_url }}" alt=""></div>
+                                {% endif %}
+                            </div>
+                            <div class="actor-info text-overflow">
+                                <span class="text-overflow">{{ actor.name }}</span>
+                                <span class="text-overflow">{{ actor.true_name }}</span>
+                                <span class="text-overflow"></span>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
 
 
                 </div>

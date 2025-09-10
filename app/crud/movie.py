@@ -26,12 +26,16 @@ async def get_movie_by_id(db: AsyncSession, movie_id: int):
     return result.scalars().first()
 
 async def pos_actor(db: AsyncSession, data: ActorIn):
-    """добавляє актора"""
+    """
+    Добавляє актора
+    На виході ActorOut
+    """
     actor = Actor(
         name=data.name,
         true_name=data.true_name,
         birth_date=data.birth_date,
-        photo_url=data.photo_url
+        photo_url=data.photo_url,
+        is_female=data.is_female
     )
     db.add(actor)
     try:

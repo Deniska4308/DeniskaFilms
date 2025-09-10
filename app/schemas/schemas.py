@@ -23,6 +23,7 @@ class ActorOut(BaseModel):
     true_name: str
     birth_date: Optional[date]
     photo_url: Optional[str]
+    is_female: bool
 
     class Config:
         from_attributes = True
@@ -32,6 +33,7 @@ class ActorIn(BaseModel):
     true_name: str
     birth_date: date | None = None
     photo_url: str | None = None
+    is_female: bool
 
 class Director(BaseModel):
     id: int
@@ -39,6 +41,7 @@ class Director(BaseModel):
     true_name: str
     birth_date: Optional[date]
     photo_url: Optional[str]
+    is_female: bool
 
     class Config:
         from_attributes = True

@@ -35,7 +35,10 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
                                                      "has_halfStar": has_halfStar,
                                                      "countries": movie.countries,
                                                      "description": movie.description,
-                                                     "genres": movie.genres
+                                                     "genres": movie.genres,
+                                                     "actors": movie.actors,
+                                                     "base_url": base_url,
+                                                     "directors": movie.directors
                                                      })
 
 @router.get("/login", response_class=HTMLResponse)

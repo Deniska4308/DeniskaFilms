@@ -115,6 +115,7 @@ class Actor(Base):
     true_name = Column(String(64), index=True, nullable=False)
     birth_date = Column(Date, index=True, nullable=True)
     photo_url = Column(Text, nullable=True)
+    is_female = Column(Boolean, nullable=False, index=True)
 
     movies = relationship(
         'Movie',
@@ -132,6 +133,7 @@ class Director(Base):
     true_name = Column(String(64), index=True, nullable=False)
     birth_date = Column(Date, index=True, nullable=True)
     photo_url = Column(Text, nullable=True)
+    is_female = Column(Boolean, nullable=False)
 
     movies = relationship(
         'Movie',
