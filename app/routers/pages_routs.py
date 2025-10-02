@@ -6,6 +6,7 @@ from app.database import get_db
 from app.crud.movie import get_movie_by_id
 from app.utils.webSite import movieDatetime, movieRuntime, movieStars
 from urllib.parse import urljoin
+from app.utils.security import decode_jwt
 
 router = APIRouter(
     tags=["page"]
@@ -46,5 +47,16 @@ async def login(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
 @router.get("/register", response_class=HTMLResponse)
-async def login(request: Request):
+async def register(request: Request):
     return templates.TemplateResponse("register.html", {"request": request})
+
+#для перевірки авторизації (тимчасово)
+@router.get("/auth/test", response_class=HTMLResponse)
+async def test(request: Request):
+    data = decode_jwt(request)
+    if not data:
+        mess = "не авторизований"
+    else:
+        mess = f"Авторизований!! Твоя роль [{data['role']}]"
+    return templates.TemplateResponse("test.html", {"request": request,
+                                                    "mess": mess})

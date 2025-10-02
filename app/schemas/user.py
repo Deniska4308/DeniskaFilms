@@ -9,10 +9,8 @@ class UserBase(BaseModel):
     username: str
     role: str
     email: str | None = None
-    # password_hash: str
     birth_date: date | None = None
     profile_img: str | None = None
-    # created_at: datetime = Field(..., description="UTC timestamp")
 
 class UserDB(UserBase):
     """Вся інфа з юзера з ПАРОЛЕМ"""
@@ -23,7 +21,18 @@ class UserDB(UserBase):
         from_attributes = True
 
 class UserCreate(BaseModel):
-    """для реєстрації"""
+    """
+    для створення
+    або для логіна
+    """
+    username: str
+    password: str
+
+class UserRegister(BaseModel):
+    """
+    для реєстрації
+    """
+    email: str | None = None
     username: str
     password: str
 

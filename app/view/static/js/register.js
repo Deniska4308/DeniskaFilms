@@ -24,3 +24,48 @@ showAceptPassword.addEventListener('click', () => {
         acept_password.type = acept_password.type === "password" ? "text" : "password";
     };
 });
+
+
+//обробка реэстрації
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = e.target;
+
+    const body = {
+        "email": f.mail.value || null,
+        "username": f.username.value,
+        "password": f.password.value
+    };
+    console.log(f.mail.value);
+    const res = await fetch('http://127.0.0.1:8000/register', {
+        method:'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body)
+    });
+
+    
+    const data = await res.json();
+});
+
+
+
+// document.getElementById('ActorForm').addEventListener('submit', async (e) => {
+//     e.preventDefault();
+//     const f = e.target;
+//     const body = {
+//         name: f.actor_name.value,
+//         true_name: f.actor_true_name.value,
+//         birth_date: f.actor_birth_date.value || null,
+//         photo_url: f.actor_photo_url.value || null
+//     };
+
+//     const res = await fetch('http://127.0.0.1:8000/api/movie/actor', {
+//         method: 'POST',
+//         headers: {'Content-Type': 'application/json'},
+//         body: JSON.stringify(body)
+//     });
+//     const data = await res.json();
+    
+    // updateLog(data);
+    // console.log(data);
+// });

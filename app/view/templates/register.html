@@ -40,9 +40,9 @@
             <h1>Реєстрація</h1>
             <p>Вітаємо Вас на мошому сайті!</p>
             <form action="" id="registerForm" method="post" class="flex-column">
-                <div class="input-div"><input type="text" name="" id="mail" class="auth-input-base" placeholder="Пошта"></div>
-                <div class="input-div"><input type="text" name="" id="username" class="auth-input-base" placeholder="Нікнейм" required></div>
-                <div class="input-div"><input type="password" name="" id="password" class="auth-input-base password-input-hiden translateY" placeholder="Пароль" required>
+                <div class="input-div"><input type="text" name="mail" id="mail" class="auth-input-base" placeholder="Пошта"></div>
+                <div class="input-div"><input type="text" name="username" id="username" class="auth-input-base" placeholder="Нікнейм" required></div>
+                <div class="input-div"><input type="password" name="password" id="password" class="auth-input-base password-input-hiden translateY" placeholder="Пароль" required>
                     <div class="show-password-btn" id="show-password-btn">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" class="pass-icon show-password-icon"
                             xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +73,7 @@
 
                     </div>
                 </div>
-                <div class="input-div"><input type="password" name="" id="acept-password" class="auth-input-base password-input-hiden translateY" placeholder="Повторіть пароль" required>
+                <div class="input-div"><input type="password" name="ascept_password" id="acept-password" class="auth-input-base password-input-hiden translateY" placeholder="Повторіть пароль" required>
                     <div class="show-password-btn" id="show-acept-password-btn">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" class="pass-icon show-password-icon"
                             xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@
         </div>
 
     </div>
-    <script src="static/js/register.js"></script>
+    <script src="{{ url_for('static', path='js/register.js') }}"></script>
 </body>
 
 </html>

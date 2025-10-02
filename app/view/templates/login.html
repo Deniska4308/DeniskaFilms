@@ -38,10 +38,10 @@
             <h1>Вхід</h1>
             <p>Вітаємо на нащому сайті</p>
             <form action="" id="login" method="post" class="flex-column">
-                <div class="input-div"><input type="text" id="username" class="auth-input-base" placeholder="Нікнейм"
+                <div class="input-div"><input type="text" id="username" name="username" class="auth-input-base" placeholder="Нікнейм"
                         required></div>
 
-                <div class="input-div"><input type="password" id="password" class="auth-input-base password-input-hiden"
+                <div class="input-div"><input type="password" id="password" name="password" class="auth-input-base password-input-hiden"
                         placeholder="Пароль" required>
                     <div class="show-password-btn">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" class="pass-icon show-password-icon"
@@ -77,7 +77,7 @@
             </form>
         </div>
     </div>
-    <script src="static/js/login.js"></script>
+    <script src="{{ url_for('static', path='js/login.js') }}"></script>
 </body>
 
 </html>

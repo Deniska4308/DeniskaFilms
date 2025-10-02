@@ -1,8 +1,9 @@
 from passlib.context import CryptContext
 from typing import Optional, Dict, Any
 from datetime import datetime, date, timezone, timedelta
-
-from jose import jwt
+from jose import jwt, ExpiredSignatureError, JWTError
+from fastapi import Request
+from sqlalchemy.testing.plugin.plugin_base import options
 
 pwd_ctx = CryptContext(
     schemes=["bcrypt"],
@@ -26,6 +27,7 @@ def create_access_token(subject: str | int,
                         extra_clims: Optional[Dict[str, Any]] = None,
                         expires_minutes: int = ACCESS_TOKEN_EXPIRE_MINUTES
                         ) -> str:
+    """створює і віддає JWT користувачу"""
     now = datetime.now(timezone.utc)
     to_encode: Dict[str, Any] = {"sub": str(subject), "iat": int(now.timestamp())} #тут базову схему для пейлоад для кодування
     if extra_clims:
@@ -33,6 +35,23 @@ def create_access_token(subject: str | int,
     expire = now + timedelta(minutes=expires_minutes)
     to_encode["exp"] = int(expire.timestamp())
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+def decode_jwt(request: Request) -> Optional[Dict]:
+    """повертає данні з jwt якщо він. Якщо проблема то None"""
+    token = request.cookies.get("access_token")
+    if not token:
+        return None
+    try:
+        return jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM],
+            options={"require_exp": True}
+        )
+    except (ExpiredSignatureError, JWTError):
+        return None
+
+
 
 def check_player(token) -> bool:
     """
