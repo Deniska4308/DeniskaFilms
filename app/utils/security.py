@@ -37,7 +37,7 @@ def create_access_token(subject: str | int,
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 def decode_jwt(request: Request) -> Optional[Dict]:
-    """повертає данні з jwt якщо він. Якщо проблема то None"""
+    """повертає данні з jwt. Якщо проблема то None -> примітивний"""
     token = request.cookies.get("access_token")
     if not token:
         return None
@@ -53,11 +53,19 @@ def decode_jwt(request: Request) -> Optional[Dict]:
 
 
 
-def check_player(token) -> bool:
+def show_player(request: Request) -> bool:
     """
-    повертає тру чи фолс у залежності від JWT токена
+    повертає тру чи фолс у залежності від JWT токена і ролі
+    використовує функцію decode_jwt(request: Request) -> Optional[Dict]
     """
-    if not token:
+    status = decode_jwt(request)
+    if status and status["role"] in ["allowed", "admin"]:
+        return True
+    else:
         return False
-    # тут маэ бути код !!!!!!!
-    ...
+
+
+
+
+
+

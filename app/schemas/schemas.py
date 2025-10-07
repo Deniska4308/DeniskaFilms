@@ -62,11 +62,19 @@ class Role(BaseModel):
     class Config:
         from_attributes = True
 
+class Dubbing(BaseModel):
+    id: int
+    movie_id: int
+    name: str
+    dubble_lang: str
+    movie_url: str
+
 #=================================Додаткові таблиці==================================
 #для повної інфи про фільм
 class MovieDetail(Movie):
     actors: List[ActorOut]
     directors: List[Director]
     countries: List[Country]
+    dubbing: List[Dubbing]
 
 

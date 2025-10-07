@@ -3,10 +3,10 @@ from fastapi.responses import HTMLResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import templates
 from app.database import get_db
-from app.crud.movie import get_movie_by_id
+from app.crud.movie import get_movie_by_id, get_dubbingFor_movie
 from app.utils.webSite import movieDatetime, movieRuntime, movieStars
 from urllib.parse import urljoin
-from app.utils.security import decode_jwt
+from app.utils.security import decode_jwt, show_player
 
 router = APIRouter(
     tags=["page"]
@@ -39,7 +39,9 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
                                                      "genres": movie.genres,
                                                      "actors": movie.actors,
                                                      "base_url": base_url,
-                                                     "directors": movie.directors
+                                                     "directors": movie.directors,
+                                                     "show_player": show_player(request),
+                                                     "dubbing": movie.dubbing
                                                      })
 
 @router.get("/login", response_class=HTMLResponse)
@@ -59,4 +61,5 @@ async def test(request: Request):
     else:
         mess = f"Авторизований!! Твоя роль [{data['role']}]"
     return templates.TemplateResponse("test.html", {"request": request,
-                                                    "mess": mess})
+                                                    "mess": mess,
+                                                    "show_player": show_player(request)})

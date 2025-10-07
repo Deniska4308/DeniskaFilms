@@ -167,11 +167,6 @@
     background-color: #00b8fc;
 }
 
-.info-item p {
-    font-size: 12px;
-    font-family: "Open Sans", sans-serif;
-}
-
 /*кінець блока в рамці*/
 
 /*іконака рейтингу*/
@@ -215,17 +210,23 @@
     font-weight: 400;
 }
 
-.movie-block .video-player {
+/*плеєр*/
+.movie-block .movie-player {
     width: 100%;
     aspect-ratio: 16/9;
     background-color: rgba(48, 48, 48, .45);
 }
 
-/*блок нема контенту*/
-.video-player {
+.movie-player { /* для відцентровки блоку "нема контенту" */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.movie-player video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .not-allowed p {
@@ -241,6 +242,7 @@
     height: 50%;
     width: 100%;
 }
+/*кінець плеєра*/
 
 /*блок жанрів під плеєром*/
 .main .movie-block .movie-genre {
@@ -248,23 +250,55 @@
     padding: 20px 0;
 }
 
+.movie-genre .info-item p{
+    font-size: 15px;
+}
+
 /*для жанрів*/
 .main .movie-block .movie-genre .info-item {
     padding: 0 18px;
     margin-right: 8px;
+    font-size: 15px;
 }
 
-/*текст для жанрів*/
-.main .movie-block .movie-genre .info-item p {
+/*текст для інфоблоків*/
+.info-item p {
+    display: flex;
     color: #fff;
-    font-size: 14px;
     margin: 0;
+    cursor: pointer;
+    align-items: center;
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
 }
 
-/*пустий блок під жанрами*/
-.empty {
-    padding: 25px;
+
+/*блок дубляжу*/
+.dubbing-block {
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
 }
+
+.dubbing .info-item p{
+    font-size: 14px;
+}
+
+.dubbing {
+    display: flex;
+}
+
+.title-dubbing {
+    color: #aeaeae;
+    margin-bottom: 8px;
+}
+
+.dubbing-block .info-item p img {
+    margin-right: 4px;
+    max-height: 26px;
+}
+/*кіннець блока дубляжу*/
+
 
 /*опис фільму*/
 .main .movie-block .description {
@@ -397,3 +431,4 @@
 .expanded {
   max-height: 9999px; /* "розгорнутий" стан — показує все */
 }
+

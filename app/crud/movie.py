@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
-from app.models import Movie, Actor
+from app.models import Movie, Actor, Dubbing
 from app.schemas.schemas import ActorIn
 from sqlalchemy.exc import IntegrityError
 
@@ -19,9 +19,29 @@ async def get_movie_by_id(db: AsyncSession, movie_id: int):
             selectinload(Movie.actors),
             selectinload(Movie.directors),
             selectinload(Movie.countries),
-            selectinload(Movie.genres)
+            selectinload(Movie.genres),
+            selectinload(Movie.dubbing)
         )
         .where(Movie.id == movie_id)
+    )
+    return result.scalars().first()
+
+async def get_dubbingFor_movie(db: AsyncSession, movie_id: int):
+    """
+    Вибирає по id фільму список озвучок
+    """
+    result = await db.execute(
+        select(Dubbing).where(Dubbing.movie_id == movie_id)
+    )
+    return result.scalars().all()
+
+async def get_dubbing_byId(db: AsyncSession, dubbing_id: int):
+    """
+    Видає по id озвучки назву файлу у папці movies
+    Видає один результат
+    """
+    result = await db.execute(
+        select(Dubbing.movie_url).where(Dubbing.id == dubbing_id)
     )
     return result.scalars().first()
 
@@ -47,3 +67,4 @@ async def pos_actor(db: AsyncSession, data: ActorIn):
         raise
     await db.refresh(actor)
     return actor
+

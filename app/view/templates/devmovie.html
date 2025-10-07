@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
 
     <title>Deniska Films</title>
 </head>
@@ -49,10 +50,10 @@
                 <div class="stars">
                     <div class="stars-container">
                         {% for _ in range(full_stars) %}
-                            <img src="{{ url_for('static', path='icons/star.svg') }}" alt="*">
+                        <img src="{{ url_for('static', path='icons/star.svg') }}" alt="*">
                         {% endfor %}
                         {% if has_halfStar %}
-                            <img src="{{ url_for('static', path='icons/half_star.svg') }}" alt="*">
+                        <img src="{{ url_for('static', path='icons/half_star.svg') }}" alt="*">
                         {% endif %}
                     </div>
                 </div>
@@ -126,11 +127,17 @@
                     {{ eng_title }}
                 </div>
             </div>
-            <div class="video-player">
+            <div class="movie-player">
+                {% if show_player %}
+                <video preload="metadata" controlslist="nodownload" controls
+                    src="http://127.0.0.1:8000/api/movie/view/1"></video>
+                {% else %}
                 <div class="not-allowed">
                     <img src="{{ url_for('static', path='gifs/no_content.gif') }}" alt="">
                     <p>Цей контент не доступний у вашій країні(</p>
                 </div>
+                {% endif %}
+
             </div>
             <div class="movie-genre">
                 {% for genre in genres %}
@@ -140,7 +147,18 @@
                 {% endfor %}
             </div>
             <div class="line"></div>
-            <div class="empty"></div>
+            <div class="dubbing-block">
+                <div class="title-dubbing">Дубляж:</div>
+                <div class="dubbing">
+                    {% for dub in dubbing %}
+                    <div class="info-item" data-dubLang="{{ dub.id }}">
+                        <p><img src="{{ base_url }}/static/icons/flag_{{ dub.dubble_lang }}.png"
+                                alt="{{ dub.dubble_lang }}">{{ dub.name }}</p>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
             <div class="line"></div>
             <div class="description">
                 {{ description|safe }}
@@ -151,24 +169,27 @@
                 <div class="title">Режисери:</div>
                 <div class="actors" id="directors">
                     {% for director in directors %}
-                        <div class="actor-item">
-                            <div class="actor-img">
-                                {% if not director.photo_url %}
-                                {% if director.is_female %}
-                                    <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_woman.svg') }}" alt=""></div>
-                                {% else %}
-                                    <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_man.svg') }}" alt=""></div>
-                                {% endif %}
-                                {% else %}
-                                    <div class="actor-img"><img src="{{ base_url }}/static/directors/{{ director.photo_url }}" alt=""></div>
-                                {% endif %}
-                            </div>
-                            <div class="actor-info text-overflow">
-                                <span class="text-overflow">{{ director.name }}</span>
-                                <span class="text-overflow">{{ director.true_name }}</span>
-                                <span class="text-overflow"></span>
-                            </div>
+                    <div class="actor-item">
+                        <div class="actor-img">
+                            {% if not director.photo_url %}
+                            {% if director.is_female %}
+                            <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_woman.svg') }}"
+                                    alt=""></div>
+                            {% else %}
+                            <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_man.svg') }}"
+                                    alt=""></div>
+                            {% endif %}
+                            {% else %}
+                            <div class="actor-img"><img src="{{ base_url }}/static/directors/{{ director.photo_url }}"
+                                    alt=""></div>
+                            {% endif %}
                         </div>
+                        <div class="actor-info text-overflow">
+                            <span class="text-overflow">{{ director.name }}</span>
+                            <span class="text-overflow">{{ director.true_name }}</span>
+                            <span class="text-overflow"></span>
+                        </div>
+                    </div>
                     {% endfor %}
 
                 </div>
@@ -180,24 +201,27 @@
                 <div class="title" id="actors-test">Актори:</div>
                 <div class="actors collapsed" id="actors">
                     {% for actor in actors %}
-                        <div class="actor-item">
-                            <div class="actor-img">
-                                {% if not actor.photo_url %}
-                                    {% if actor.is_female %}
-                                        <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_woman.svg') }}" alt=""></div>
-                                    {% else %}
-                                        <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_man.svg') }}" alt=""></div>
-                                    {% endif %}
-                                {% else %}
-                                    <div class="actor-img"><img src="{{ base_url }}/static/actors/{{ actor.photo_url }}" alt=""></div>
-                                {% endif %}
+                    <div class="actor-item">
+                        <div class="actor-img">
+                            {% if not actor.photo_url %}
+                            {% if actor.is_female %}
+                            <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_woman.svg') }}"
+                                    alt=""></div>
+                            {% else %}
+                            <div class="actor-img"><img src="{{ url_for('static', path='icons/nophoto_man.svg') }}"
+                                    alt=""></div>
+                            {% endif %}
+                            {% else %}
+                            <div class="actor-img"><img src="{{ base_url }}/static/actors/{{ actor.photo_url }}" alt="">
                             </div>
-                            <div class="actor-info text-overflow">
-                                <span class="text-overflow">{{ actor.name }}</span>
-                                <span class="text-overflow">{{ actor.true_name }}</span>
-                                <span class="text-overflow"></span>
-                            </div>
+                            {% endif %}
                         </div>
+                        <div class="actor-info text-overflow">
+                            <span class="text-overflow">{{ actor.name }}</span>
+                            <span class="text-overflow">{{ actor.true_name }}</span>
+                            <span class="text-overflow"></span>
+                        </div>
+                    </div>
                     {% endfor %}
 
 
@@ -205,11 +229,12 @@
                 <div class="show-all-button">
                     <span>Показати всіх</span>
                     <div class="icon">
-                        <svg class="icon-svg" id="rotate-svg" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="icon-svg" id="rotate-svg" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M14.9401 6.75012L10.0501 11.6401C9.47256 12.2176 8.52756 12.2176 7.95006 11.6401L3.06006 6.75012"
                                 stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round"/>
+                                stroke-linejoin="round" />
                         </svg>
                     </div>
                 </div>
@@ -217,8 +242,7 @@
 
             <div class="line"></div>
         </div>
-    </div>
-    <script src="{{ url_for('static', path='js/movie.js') }}"></script>
+        <script src="{{ url_for('static', path='js/movie.js') }}"></script>
     </div>
 </body>
 

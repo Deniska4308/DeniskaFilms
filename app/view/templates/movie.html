@@ -55,10 +55,10 @@
                 <div class="stars">
                     <div class="stars-container">
                         {% for _ in range(full_stars) %}
-                            <img src="{{ url_for('static', path='icons/star.svg') }}" alt="*">
+                        <img src="{{ url_for('static', path='icons/star.svg') }}" alt="*">
                         {% endfor %}
                         {% if has_halfStar %}
-                            <img src="{{ url_for('static', path='icons/half_star.svg') }}" alt="*">
+                        <img src="{{ url_for('static', path='icons/half_star.svg') }}" alt="*">
                         {% endif %}
                     </div>
                 </div>
@@ -87,11 +87,11 @@
                 </div>
                 <div class="value">
                     {% for country in countries%}
-                        <div class="info-item">
-                            <p>{{ country.name }}</p>
-                        </div>
+                    <div class="info-item">
+                        <p>{{ country.name }}</p>
+                    </div>
                     {% endfor %}
-                    
+
                 </div>
             </div>
 

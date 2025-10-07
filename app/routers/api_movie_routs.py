@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.schemas.schemas import MovieDetail, ActorOut, ActorIn
 from app.database import get_db
-from app.crud.movie import get_movie_by_id, pos_actor
+from app.crud.movie import get_movie_by_id, pos_actor, get_dubbing_byId
 from sqlalchemy.exc import IntegrityError
+import os
 
 router = APIRouter(
     prefix="/api/movie",
@@ -23,3 +25,12 @@ async def post_actor(payload: ActorIn, db: AsyncSession = Depends(get_db)):
     if actor is None:
         raise  HTTPException(status_code=409, detail="Actor already exists")
     return actor
+
+#видає файл по ід озвучки
+@router.get("/view/{dubbing_id}")
+async def view_movie(dubbing_id: int, db: AsyncSession = Depends(get_db)):
+    file_name = await get_dubbing_byId(db, dubbing_id)
+    movie_path = os.path.join('app/view/movies', file_name)
+    if not os.path.exists(movie_path):
+        raise HTTPException(status_code=404, detail="movie not found")
+    return FileResponse(movie_path, media_type="video/mp4")
