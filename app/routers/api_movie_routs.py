@@ -29,6 +29,7 @@ async def post_actor(payload: ActorIn, db: AsyncSession = Depends(get_db)):
 #видає файл по ід озвучки
 @router.get("/view/{dubbing_id}")
 async def view_movie(dubbing_id: int, db: AsyncSession = Depends(get_db)):
+    #тут треба захистити
     file_name = await get_dubbing_byId(db, dubbing_id)
     movie_path = os.path.join('app/view/movies', file_name)
     if not os.path.exists(movie_path):

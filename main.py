@@ -3,7 +3,6 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 
 #мої модулі
-
 from app.routers import api_movie_routs, pages_routs, api_user_routs, auth
 from app.core.config import static_dir
 
@@ -28,4 +27,3 @@ app.include_router(api_user_routs.router)
 app.include_router(auth.router)
 
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
-

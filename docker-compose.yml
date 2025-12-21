@@ -1,0 +1,11 @@
+services:
+  deniskafilms:
+    build: .
+    container_name: deniska_films
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - E:/DeniskaData/actors:/app/app/view/static/actors
+      - E:/DeniskaData/movies:/app/app/view/movies

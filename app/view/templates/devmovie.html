@@ -130,7 +130,7 @@
             <div class="movie-player">
                 {% if show_player %}
                 <video preload="metadata" controlslist="nodownload" controls
-                    src="http://127.0.0.1:8000/api/movie/view/1"></video>
+                    src="http://127.0.0.1:8000/api/movie/view/{{ start_dub }}"></video>
                 {% else %}
                 <div class="not-allowed">
                     <img src="{{ url_for('static', path='gifs/no_content.gif') }}" alt="">

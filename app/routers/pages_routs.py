@@ -22,6 +22,17 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
     movieDay, movieMonth, movieYear = movieDatetime(movie.release_date)
     full_stars, has_halfStar = movieStars(movie.deniska_rating)
 
+    #можливо це треба перенести(це не риторика)
+    def get_start_dubbing(data):
+        start_dubbung = None
+        for dub in data.dubbing:
+            if dub.dubble_lang == 'uk':
+                start_dubbung = dub.id
+        if not start_dubbung and data.dubbing:
+            start_dubbung = data.dubbing[0].id
+        return start_dubbung
+
+
     return templates.TemplateResponse("devmovie.html", {"request": request,
                                                      "title": movie.title,
                                                      "eng_title": movie.original_title,
@@ -41,7 +52,8 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
                                                      "base_url": base_url,
                                                      "directors": movie.directors,
                                                      "show_player": show_player(request),
-                                                     "dubbing": movie.dubbing
+                                                     "dubbing": movie.dubbing,
+                                                     "start_dub": get_start_dubbing(movie)
                                                      })
 
 @router.get("/login", response_class=HTMLResponse)

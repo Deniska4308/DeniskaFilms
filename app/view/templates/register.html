@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', path='css/deniska_filmsBase.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/register.css') }}">
-    <title>Реэстрація | DeniskaFilms</title>
+    <title>Реєстрація | DeniskaFilms</title>
 </head>
 
 <body>
     <header>
         <div class="upper-header">
             <div class="nav container">
-                <div class="logo">Deniska <span id="films">Films</span></div>
+                <a href="{{ base_url }}/auth/test"><div class="logo">Deniska <span id="films">Films</span></div></a>
                 <div class="search">
                     <img src="static/icons/search.svg" alt="нема">
                     <input type="text" placeholder="Пошук фільмів">
@@ -38,7 +38,7 @@
 
         <div class="register-form">
             <h1>Реєстрація</h1>
-            <p>Вітаємо Вас на мошому сайті!</p>
+            <p>Вітаємо Вас на нашому сайті!</p>
             <form action="" id="registerForm" method="post" class="flex-column">
                 <div class="input-div"><input type="text" name="mail" id="mail" class="auth-input-base" placeholder="Пошта"></div>
                 <div class="input-div"><input type="text" name="username" id="username" class="auth-input-base" placeholder="Нікнейм" required></div>
