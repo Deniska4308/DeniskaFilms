@@ -130,7 +130,7 @@
             <div class="movie-player">
                 {% if show_player %}
                 <video preload="metadata" controlslist="nodownload" controls
-                    src="http://127.0.0.1:8000/api/movie/view/{{ start_dub }}"></video>
+                    src="/api/movie/view/{{ start_dub }}"></video>
                 {% else %}
                 <div class="not-allowed">
                     <img src="{{ url_for('static', path='gifs/no_content.gif') }}" alt="">
@@ -152,7 +152,7 @@
                 <div class="dubbing">
                     {% for dub in dubbing %}
                     <div class="info-item" data-dubLang="{{ dub.id }}">
-                        <p><img src="{{ base_url }}/static/icons/flag_{{ dub.dubble_lang }}.png"
+                        <p><img src="/static/icons/flag_{{ dub.dubble_lang }}.png"
                                 alt="{{ dub.dubble_lang }}">{{ dub.name }}</p>
                     </div>
                     {% endfor %}
@@ -180,7 +180,7 @@
                                     alt=""></div>
                             {% endif %}
                             {% else %}
-                            <div class="actor-img"><img src="{{ base_url }}/static/directors/{{ director.photo_url }}"
+                            <div class="actor-img"><img src="/static/directors/{{ director.photo_url }}"
                                     alt=""></div>
                             {% endif %}
                         </div>
@@ -212,7 +212,7 @@
                                     alt=""></div>
                             {% endif %}
                             {% else %}
-                            <div class="actor-img"><img src="{{ base_url }}/static/actors/{{ actor.photo_url }}" alt="">
+                            <div class="actor-img"><img src="/static/actors/{{ actor.photo_url }}" alt="">
                             </div>
                             {% endif %}
                         </div>

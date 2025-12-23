@@ -9,3 +9,4 @@ services:
     volumes:
       - E:/DeniskaData/actors:/app/app/view/static/actors
       - E:/DeniskaData/movies:/app/app/view/movies
+      - E:/DeniskaData/postets:/app/app/view/static/posters

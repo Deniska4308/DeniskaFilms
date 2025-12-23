@@ -49,7 +49,6 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
                                                      "description": movie.description,
                                                      "genres": movie.genres,
                                                      "actors": movie.actors,
-                                                     "base_url": base_url,
                                                      "directors": movie.directors,
                                                      "show_player": show_player(request),
                                                      "dubbing": movie.dubbing,
