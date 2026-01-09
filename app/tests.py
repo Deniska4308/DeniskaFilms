@@ -204,13 +204,38 @@ data = {
 }
 
 
-def get_start_dubbing():
-    start_dubbing = None
-    for dub in data["dubbing"]:
-        if dub['dubble_lang'] == 'uk':
-            start_dubbing = dub['id']
-    if not start_dubbing and data["dubbing"]:
-        start_dubbing = data['dubbing'][0]['id']
-    return start_dubbing
+from jose import jwt, ExpiredSignatureError, JWTError
+from fastapi import Request
+# def get_start_dubbing():
+#     start_dubbing = None
+#     for dub in data["dubbing"]:
+#         if dub['dubble_lang'] == 'uk':
+#             start_dubbing = dub['id']
+#     if not start_dubbing and data["dubbing"]:
+#         start_dubbing = data['dubbing'][0]['id']
+#     return start_dubbing
+#
+# print(get_start_dubbing())
 
-print(get_start_dubbing())
+SECRET_KEY = "JWT_SECRET"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
+
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzY3ODIzOTQzLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3Njc4Mjc1NDN9.-KTEipAVhANjI8Z5zUpgAxHnbw_cm9GYyqR6geO0q24"
+def decode_jwt(tocken):
+    """повертає дані з jwt. Якщо проблема то None -> примітивний"""
+    if not tocken:
+        return None
+    try:
+        return jwt.decode(
+            tocken,
+            SECRET_KEY,
+            algorithms=[ALGORITHM],
+            options={"require_exp": True}
+        )
+    except (ExpiredSignatureError, JWTError):
+        return None
+
+
+
+print(decode_jwt(token))

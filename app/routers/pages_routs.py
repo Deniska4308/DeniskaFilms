@@ -14,7 +14,7 @@ router = APIRouter(
 
 @router.get("/movie/{movie_id}", response_class=HTMLResponse)
 async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = Depends(get_db)):
-    base_url = "http://127.0.0.1:8000"
+    # base_url = "http://127.0.0.1:8000"
     movie = await get_movie_by_id(db, movie_id)
     if not movie:
         raise HTTPException(status_code=404, detail="Movie not found(")
@@ -26,7 +26,7 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
     def get_start_dubbing(data):
         start_dubbung = None
         for dub in data.dubbing:
-            if dub.dubble_lang == 'uk':
+            if dub.dubble_lang == 'ukr':
                 start_dubbung = dub.id
         if not start_dubbung and data.dubbing:
             start_dubbung = data.dubbing[0].id
@@ -38,7 +38,7 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
                                                      "eng_title": movie.original_title,
                                                      "rating": movie.deniska_rating,
                                                      "age_rating": movie.age_rating,
-                                                     "poster_url": urljoin(base_url, movie.poster_url),
+                                                     "poster_url": movie.poster_url,
                                                      "movieDay": movieDay,
                                                      "movieMonth": movieMonth,
                                                      "movieYear": movieYear,

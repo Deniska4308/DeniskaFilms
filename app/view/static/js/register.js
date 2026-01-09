@@ -6,7 +6,7 @@ const showAceptPassword = document.getElementById('show-acept-password-btn');
 const password = document.getElementById('password');
 const acept_password = document.getElementById('acept-password');
 
-// обробка кліку попершого поля
+// обробка кліку попершого поля 
 showPassword.addEventListener('click', () => {
     showPassword.classList.toggle("show");
     showAceptPassword.classList.toggle("show")
@@ -37,7 +37,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
         "password": f.password.value
     };
     console.log(f.mail.value);
-    const res = await fetch('http://127.0.0.1:8000/register', {
+    const res = await fetch('/register', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body)

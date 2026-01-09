@@ -37,7 +37,7 @@ def create_access_token(subject: str | int,
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 def decode_jwt(request: Request) -> Optional[Dict]:
-    """повертає данні з jwt. Якщо проблема то None -> примітивний"""
+    """повертає дані з jwt. Якщо проблема то None -> примітивний"""
     token = request.cookies.get("access_token")
     if not token:
         return None
@@ -63,9 +63,3 @@ def show_player(request: Request) -> bool:
         return True
     else:
         return False
-
-
-
-
-
-
