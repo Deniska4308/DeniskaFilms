@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import templates
 from app.database import get_db
-from app.crud.movie import get_movie_by_id, get_dubbingFor_movie
+from app.crud.movie import get_movie_by_id, get_dubbingFor_movie, get_movies_list
 from app.utils.webSite import movieDatetime, movieRuntime, movieStars
 from urllib.parse import urljoin
 from app.utils.security import decode_jwt, show_player
@@ -54,6 +54,14 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
                                                      "dubbing": movie.dubbing,
                                                      "start_dub": get_start_dubbing(movie)
                                                      })
+
+@router.get("/", response_class=HTMLResponse)
+async def main(request: Request, db: AsyncSession = Depends(get_db)):
+    movielist = await get_movies_list(db)
+
+    return templates.TemplateResponse("main.html", {"request": request,
+                                                    "movielist": movielist
+                                                    })
 
 @router.get("/login", response_class=HTMLResponse)
 async def login(request: Request):

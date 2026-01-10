@@ -26,6 +26,15 @@ async def get_movie_by_id(db: AsyncSession, movie_id: int):
     )
     return result.scalars().first()
 
+async def get_movies_list(db: AsyncSession):
+    """
+    видає список фільмів
+    """
+    result = await db.execute(
+        select(Movie)
+    )
+    return  result.scalars().all()
+
 async def get_dubbingFor_movie(db: AsyncSession, movie_id: int):
     """
     Вибирає по id фільму список озвучок

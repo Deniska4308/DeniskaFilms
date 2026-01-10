@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/mainpage.css') }}">
+<!--    <link rel="stylesheet" href="../static/css/mainpage.css">-->
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+        {% for movie in movielist %}
+            <li><a href="/movie/{{ movie.id }}">{{ movie.title }} ({{ movie.original_title }}) {{ movie.deniska_rating }}/10</a></li>
+        {% endfor %}
+    </ol>
+    <nav><a href="/login">Увійти</a><a href="/register">Зареєструватися</a></nav>
+</body>
+</html>
