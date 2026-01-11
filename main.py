@@ -7,7 +7,11 @@ from app.routers import api_movie_routs, pages_routs, api_user_routs, auth
 from app.core.config import static_dir
 
 
-app = FastAPI()
+app = FastAPI(
+	docs_url=None,
+	redock_url=None,
+	open_api=None
+)
 
 app.add_middleware(
     CORSMiddleware,
