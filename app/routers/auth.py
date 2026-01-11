@@ -23,8 +23,14 @@ async def login(payload: UserCreate, response: Response,db: AsyncSession = Depen
 
     token = create_access_token(subject=user.id, extra_clims={"role": user.role})
     response.set_cookie(
-        "access_token", token,
-        httponly=True, path="/", max_age=60*60
+        key="access_token",
+        value=token,
+        httponly=True,
+        secure=True,
+        samesite="lax",
+        domain='.deniskafilms.com',
+        path="/",
+        max_age=60*60*24*7 #7 діб в секундах
     )
     return {"access_token": token, "token_type": "bearer"}
 

@@ -13,7 +13,7 @@ pwd_ctx = CryptContext(
 
 SECRET_KEY = "JWT_SECRET"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = 60*24*7
 
 def hash_password(passwort: str) -> str:
     """Хешує пароль (сіль генерується автоматично, все всередині рядка)."""
