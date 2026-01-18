@@ -8,9 +8,9 @@ from app.core.config import static_dir
 
 
 app = FastAPI(
-	docs_url=None,
-	redock_url=None,
-	open_api=None
+	# docs_url=None,
+	# redock_url=None,
+	# open_api=None
 )
 
 app.add_middleware(

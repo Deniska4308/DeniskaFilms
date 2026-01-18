@@ -8,22 +8,28 @@ showPassword.addEventListener('click', () => {
 
 });
 
-
-
-
+//оброька реєстрації (хулі тут такого не було?)
 document.getElementById('login').addEventListener('submit', async (e) => {
     e.preventDefault();
     const f = e.target;
-
     const body = {
-        "username": f.username.value,
-        "password": f.password.value
-    };
+        "username": f.password.value,
+        "password": f.username.value
+    }
+    console.log(f.username.value)
 
     const res = await fetch('/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(body)
-    });
-    console.log(res)
-});
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        credentials: "include"
+    })
+
+    //logs
+    if(!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        console.log(err.detail || "Login failed");
+        console.log(res.status || "Login failed");
+        return;
+    }
+})

@@ -35,6 +35,10 @@
     font-weight: 400;
 }
 
+.country-wrap {
+    flex-wrap: wrap;
+}
+
 .info-block img {
     max-width: 268px;
 }
