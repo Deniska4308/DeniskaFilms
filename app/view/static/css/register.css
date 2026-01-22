@@ -73,7 +73,6 @@
     color: #aeaeae;
 }
 
-
 .agree label a {
     font-size: 14px;
     text-decoration: underline;
@@ -81,4 +80,9 @@
 
 .register-acept {
     margin-top: 8px;
+}
+
+.message p {
+    color: #FF5757;
+    margin-left: 11px;
 }

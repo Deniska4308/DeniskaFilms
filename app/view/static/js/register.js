@@ -37,14 +37,20 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
         "password": f.password.value
     };
     console.log(f.mail.value);
+
     const res = await fetch('/register', {
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body)
     });
 
-    
-    const data = await res.json();
+    if(res.status == 409) { 
+        document.getElementById("mess").innerHTML = '<p>Користувач з таким логіном уже існує</p>'
+    }else if(res.status == 200) {
+        var mess = document.getElementById("mess").innerHTML = ``
+        window.location.href = '/'
+    }
+
 });
 
 

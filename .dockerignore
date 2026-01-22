@@ -5,3 +5,4 @@ __pycache__/
 venv/
 .git/
 .env
+app/view/static/posters/

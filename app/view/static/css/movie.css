@@ -13,7 +13,7 @@
 /*треба більш прлавніше*/
 @media(max-width: 1800px) {
     .container {
-        width: calc(100% - 20%);
+        width: calc(100% - 35%);
     }
 }
 
@@ -21,6 +21,7 @@
 .main {
     display: flex;
     padding-top: 24px;
+    align-items: flex-start;
 }
 
 /*блок з інфою про фільм*/
@@ -29,10 +30,12 @@
     border-radius: 8px;
     background-color: #252627;
     max-width: 320px;
-    height: 870px;
+    display: flex;
+    flex-direction: column;
     padding: 15px;
     font-size: 14px;
     font-weight: 400;
+    box-sizing: border-box;
 }
 
 .country-wrap {
@@ -40,7 +43,7 @@
 }
 
 .info-block img {
-    max-width: 268px;
+    max-width: 100%;
 }
 
 .info-block .rating .rating-header {

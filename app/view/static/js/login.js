@@ -26,10 +26,13 @@ document.getElementById('login').addEventListener('submit', async (e) => {
     })
 
     //logs
-    if(!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        console.log(err.detail || "Login failed");
-        console.log(res.status || "Login failed");
-        return;
-    }
+    if(res.status == 401) {
+        const message = `<p>Логін або пароль невірні</p>`;
+        var mess = document.getElementById("mess");
+        mess.innerHTML = message;
+    }else if(res.status == 200) {
+        var mess = document.getElementById("mess").innerHTML = ``
+        window.location.href = "/"
+    };
+
 })
