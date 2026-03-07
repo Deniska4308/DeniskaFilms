@@ -40,6 +40,14 @@ body {
     font-weight: 400;
 }
 
+.text-overflow-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -53,128 +61,81 @@ a {
     color: #fff;
 }
 
-
+/* хедер */
 header {
-    box-sizing: border-box;
-    z-index: 1;
-}
-
-/*Верхній хедер*/
-header .upper-header {
-    background-color: #252627;
+    height: 80px;
     width: 100%;
-    height: 70px;
+    background-color: #252627;
 }
 
-.nav {
-    height: 100%;
+header .header {
     display: flex;
     justify-content: space-between;
+    height: 100%;
     align-items: center;
 }
 
-header .upper-header .nav .logo {
+.logo span {
+    color: #00b8fc;
+}
+
+.logo {
     font-family: "Paytone One", sans-serif;
     font-size: 25px;
     font-weight: 400;
     color: #fff;
 }
 
-#films {
-    color: #00b8fc;
+/* інпут для пошуку в хедері */
+.main-search input {
+    border: 0;
+    height: 48px;
+    background-color: #303030;
+    padding: 0;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
 }
 
-header .upper-header .nav .search {
-    display: flex;
-    align-items: center;
-    background-color: #303030;
+.main-search input[type="text"]:focus {
+    outline: 0;
+}
+
+.main-search {
     height: 50px;
     width: 500px;
-    border-radius: 50px;
-    padding: 0 20px;
-    transition: .2s;
-}
-
-header .upper-header .nav .search:hover {
-    border: solid 1px #00b8fc;
-}
-
-header .upper-header .nav .search img {
-    margin-right: 5px;
-}
-
-header .upper-header .nav .search input {
-    color: #fff;
-    border: none;
-    height: 48px;
-    width: 430px;
+    border-radius: 25px;
     background-color: #303030;
-}
-
-header .upper-header .nav nav {
-    height: 100%;
-}
-
-/*кінець верхньго хедера*/
-
-/*нижній хедер*/
-header .under-header {
-    height: 45px;
-    background-color: #303030;
-}
-
-.content-type {
-    width: calc(100% - 40%);
-    margin: auto;
-    height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 20px;
+    border: 1px solid transparent;
+    transition: border-color .25s;
 }
 
-header .under-header .content-type ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    height: 100%;
+.main-search:hover {
+   border-color: #aeaeae;
 }
 
-header .under-header .content-type ul li {
-    font-family: "Paytone One", sans-serif;
-    margin: 0 12px;
-    width: 100%;
+.main-search:focus-within {
+    border: 1px #ffffff solid;
+}
+/* інпут для пошуку в хедері кінець */
+
+.login-btn {
     display: flex;
     align-items: center;
+    
 }
 
-header .under-header .content-type ul li a {
-    cursor: default;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    color: #525252;
+/* нав хедер */
+nav .login-btn {
+    font-size: 14px;
 }
-
-/*не вcі вкладки готові*/
-/* header .under-header .content-type ul li a:hover {
-    color: #fff;
-    border-bottom: solid 1px #00b8fc;
-} */
-
-#test {
-    cursor: pointer;
-    color: #aeaeae;
-}
-
-#test:hover {
-    color: #fff;
-    border-bottom: solid 1px #00b8fc;
-}
-/*кінець нижнього хедера*/
 
 /*--------------------стилі для сторінок логінів і реєстрацій------------------------------*/
-
+        
 /*базові стилі для інпута*/
 .auth-input-base {
     height: 55px;
@@ -255,7 +216,7 @@ header .under-header .content-type ul li a {
     height: 24px;
     display: none;
     color: #aeaeae;
-    transition: .2s;
+    transition: .25s;
 }
 
 .pass-icon:hover {
@@ -265,3 +226,162 @@ header .under-header .content-type ul li a {
 .show-password-btn.show .show-password-icon { display: none; }
 .show-password-btn.show .hide-password-icon { display: inline; }
 .show-password-btn:not(.show) .show-password-icon { display: inline; }
+
+
+/*
+========================================================
+********************Панель з фільмами*******************
+========================================================
+*/
+
+.movie-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 20px;
+    gap: 10px;
+}
+
+.movie-item {
+    background-color: rgb(92, 84, 84);
+    transition: 0.25s;
+    position: relative;
+    border-radius: 0 0 8px 8px;
+    width: 210px;
+    cursor: pointer;
+}
+
+.movie-item:hover {
+    box-shadow: 5px 5px 4px 0 rgba(0, 0, 0, 0.25);
+    scale: 1.01;
+}
+
+.movie-item-grup {
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.movie-item .movie-item-grup img {
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
+
+.movie-item .movie-item-grup .hover-ground {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff00;
+    position: absolute;
+    inset: 0;
+    transition: .25s;
+    z-index: 1;
+}
+
+/* початкова позиція кнопки play*/
+.play-button {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    border: #fff solid 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    position: relative;
+    top: 3px;
+    transition: .25s;
+}
+
+.movie-item .movie-item-grup .hover-ground:hover {
+    background-color: #00b8fc30;
+    cursor: pointer;
+    
+}
+
+/*кнока "плей" коли наведено на картек фільму*/
+.movie-item .movie-item-grup .hover-ground:hover .play-button {
+    opacity: 1;
+    top: 0;
+}
+
+.movie-item .movie-item-grup .hover-ground .play-button:hover {
+    background-color: #00b8fc;
+    border: 2px solid #00b8fc;
+}
+
+
+.movie-item:hover .movie-info  {
+    /* box-shadow: 5px 5px 4px 0 rgba(0, 0, 0, 0.25); */
+
+}
+
+/* нижня частина для картки фільму */
+.movie-info {
+    box-sizing: border-box;
+    transition: .25s;
+    height: 55px;
+    background-color: #252627;
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px 16px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.itemtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemtitle .cardtitle { 
+    font-size: 12px;
+    font-weight: 700;
+    
+}
+
+.year {
+    color: #fff;
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.moviegenre {
+    margin-left: 4px;
+    color: #aeaeae;
+    cursor: pointer;
+}
+
+.moviegenre:hover {
+    color: #fff;
+}
+
+.moviegenre::before {
+    content: '•';
+    font-size: 14px;
+}
+
+.movie-info .description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-info .description .genres { 
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    align-items: center;
+}
+
+/*
+========================================================
+**************Панель зфільмами кінець*******************
+========================================================
+*/

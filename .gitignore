@@ -5,7 +5,6 @@
 .env
 app/tests.py
 app/view/movies
-README.md
 .env
 .env.*
 __pycache__/

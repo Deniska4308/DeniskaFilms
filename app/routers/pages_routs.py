@@ -58,7 +58,6 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
 @router.get("/", response_class=HTMLResponse)
 async def main(request: Request, db: AsyncSession = Depends(get_db)):
     movielist = await get_movies_list(db)
-
     return templates.TemplateResponse("main.html", {"request": request,
                                                     "movielist": movielist
                                                     })
@@ -82,3 +81,11 @@ async def test(request: Request):
     return templates.TemplateResponse("test.html", {"request": request,
                                                     "mess": mess,
                                                     "show_player": show_player(request)})
+
+@router.get("/devhome", response_class=HTMLResponse)
+async def mainpage(request: Request, db: AsyncSession = Depends(get_db)):
+     movielist = await get_movies_list(db)
+     return templates.TemplateResponse("devmain.html", {
+        "request": request,
+        "movielist": movielist
+     })

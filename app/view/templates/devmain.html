@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', path='icons/favicon.svg') }}" type="image/x-icon">
+
+    <!-- <link rel="stylesheet" href="../static/css/deniska_filmsBase.css">
+    <link rel="stylesheet" href="../static/css/devmainpage.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/deniska_filmsBase.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/devmainpage.css') }}">
+    <title>Deniska Films | Welcome Page</title>
+</head>
+
+<body>
+    <header>
+        <div class="header container">
+            <a href="/" class="logo">Deniska <span>Films</span></a>
+            <div class="main-search"><input type="text"></div>
+            <nav>
+                <a class="login-btn" href="/login">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
+                            stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M20.5901 22C20.5901 18.13 16.7402 15 12.0002 15C7.26015 15 3.41016 18.13 3.41016 22"
+                            stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Вхід
+                </a>
+            </nav>
+        </div>
+    </header>
+    <div class="main ">
+        <div class="movie-list">
+            <!-- <div class="movie-item">
+                <div class="movie-item-grup">
+                    <img src="../static/posters/Blade_Runner_2049.webp" alt="">
+                    <div class="hover-ground">
+                        <div class="play-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 21 20"
+                                fill="none">
+                                <path
+                                    d="M3.70837 9.99983V7.03316C3.70837 3.34983 6.31671 1.8415 9.50837 3.68316L12.0834 5.1665L14.6584 6.64983C17.85 8.4915 17.85 11.5082 14.6584 13.3498L12.0834 14.8332L9.50837 16.3165C6.31671 18.1582 3.70837 16.6498 3.70837 12.9665V9.99983Z"
+                                    stroke="white" stroke-width="1.4" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-info">
+                    <div class="itemtitle">
+                        <div class="cardtitle text-overflow-ellipsis" title="Той, хто біжить по лезу 2049">Той, хто
+                            біжить по лезу 2049</div>
+                    </div>
+                    <div class="description">
+                        <div class="genres">
+                            <a class="year">2077</a>
+                            <a class="moviegenre">Драма</a>
+                            <a class="moviegenre">Трилер</a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            {% for movie in movielist %}
+            <div class="movie-item" onclick="window.location.href='/movie/{{ movie.id }}'">
+                <div class="movie-item-grup">
+                    <img src="/static/posters/{{ movie.poster_url }}" alt="">
+                    <div class="hover-ground">
+                        <div class="play-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 21 20"
+                                fill="none">
+                                <path
+                                    d="M3.70837 9.99983V7.03316C3.70837 3.34983 6.31671 1.8415 9.50837 3.68316L12.0834 5.1665L14.6584 6.64983C17.85 8.4915 17.85 11.5082 14.6584 13.3498L12.0834 14.8332L9.50837 16.3165C6.31671 18.1582 3.70837 16.6498 3.70837 12.9665V9.99983Z"
+                                    stroke="white" stroke-width="1.4" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-info">
+                    <div class="itemtitle">
+                        <div class="cardtitle text-overflow-ellipsis" title="{{ movie.original_title }}">{{ movie.title }}</div>
+                    </div>
+                    <div class="description">
+                        <div class="genres">
+                            <a class="year">{{ movie.release_date.strftime('%Y') }}</a>
+                            {% for genre in movie.genres[:2] %}
+                            <a class="moviegenre">{{ genre.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>

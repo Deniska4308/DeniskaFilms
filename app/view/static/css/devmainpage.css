@@ -1,0 +1,34 @@
+.container {
+    width: calc(100% - 45%);
+    /* можна відраховувати відстань ps: крута штука */
+    margin: 0 auto;
+}
+
+.main {
+    display: flex;
+    margin: 0 auto;
+    display: flex;
+    width: 1332px;
+}
+
+@media (max-width: 1332px) {
+    .movie-list {
+        grid-template-columns: repeat(3, auto);
+    }
+    .main {
+        width: 800px;
+    }
+}
+
+@media (max-width: 817px) {
+    .movie-list {
+        grid-template-columns: repeat(2, auto);
+    }
+    .main {
+        width: 700px;
+    }
+}
+
+
+
+

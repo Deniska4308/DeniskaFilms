@@ -8,7 +8,7 @@ showPassword.addEventListener('click', () => {
 
 });
 
-//оброька реєстрації (хулі тут такого не було?)
+//оброька реєстрації
 document.getElementById('login').addEventListener('submit', async (e) => {
     e.preventDefault();
     const f = e.target;

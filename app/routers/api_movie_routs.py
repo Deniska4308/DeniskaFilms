@@ -45,7 +45,7 @@ async def view_movie(dubbing_id: int, request: Request, db: AsyncSession = Depen
     else:
         raise HTTPException(status_code=404, detail="not allowed")
 
-@router.get("/movies/list", response_model=List[Movie])
+@router.get("/movies/list3", response_model=List[Movie])
 async def get_movie_list(db: AsyncSession = Depends(get_db)):
     movielist = await get_movies_list(db)
     for movie in movielist:

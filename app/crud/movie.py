@@ -77,3 +77,10 @@ async def pos_actor(db: AsyncSession, data: ActorIn):
     await db.refresh(actor)
     return actor
 
+async def get_actor(db = AsyncSession, limit: int = 10, offset: int = 0):
+    result = await db.execute(
+        select(Actor)
+        .offset(offset)
+        .limit(limit)
+    )
+    return result.scalars().all()
