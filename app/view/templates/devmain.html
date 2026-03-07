@@ -17,16 +17,18 @@
         rel="stylesheet">
     <link rel="icon" href="{{ url_for('static', path='icons/favicon.svg') }}" type="image/x-icon">
 
-    <!-- <link rel="stylesheet" href="../static/css/deniska_filmsBase.css">
-    <link rel="stylesheet" href="../static/css/devmainpage.css"> -->
+    <link rel="stylesheet" href="../static/css/deniska_filmsBase.css">
+    <link rel="stylesheet" href="../static/css/devmainpage.css">
+    <link rel="stylesheet" href="../static/css/deniskafilms_responsiveBase.css">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/deniska_filmsBase.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/css/devmainpage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/deniskafilms_responsiveBase.css') }}">
     <title>Deniska Films | Welcome Page</title>
 </head>
 
 <body>
     <header>
-        <div class="header container">
+        <div class="header header-container">
             <a href="/" class="logo">Deniska <span>Films</span></a>
             <div class="main-search"><input type="text"></div>
             <nav>

@@ -7,25 +7,18 @@
 .main {
     display: flex;
     margin: 0 auto;
-    display: flex;
-    width: 1332px;
+    justify-content: center;
 }
 
 @media (max-width: 1332px) {
     .movie-list {
-        grid-template-columns: repeat(3, auto);
-    }
-    .main {
-        width: 800px;
+        grid-template-columns: repeat(3, 210px);
     }
 }
 
 @media (max-width: 817px) {
     .movie-list {
-        grid-template-columns: repeat(2, auto);
-    }
-    .main {
-        width: 700px;
+        grid-template-columns: repeat(2, 210px);
     }
 }
 
