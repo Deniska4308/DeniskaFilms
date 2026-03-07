@@ -12,26 +12,22 @@
 </head>
 
 <body>
-    <header>
-        <div class="upper-header">
-            <div class="nav container">
-                <a href="{{ base_url }}/auth/test"><div class="logo">Deniska <span id="films">Films</span></div></a>
-                <div class="search">
-                    <img src="static/icons/search.svg" alt="нема">
-                    <input type="text" placeholder="Пошук фільмів">
-                </div>
-                <nav></nav>
-            </div>
-        </div>
-        <div class="under-header">
-            <div class="content-type">
-                <ul>
-                    <li><a href="/" id="test">Фільми</a></li>
-                    <li><a href="#">Серіали</a></li>
-                    <li><a href="#">Мультфільми</a></li>
-                    <li><a href="#">Мультсеріали</a></li>
-                </ul>
-            </div>
+<header>
+        <div class="header container">
+            <a href="/" class="logo">Deniska <span>Films</span></a>
+            <div class="main-search"><input type="text"></div>
+            <nav>
+                <a class="login-btn" href="/login">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
+                            stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M20.5901 22C20.5901 18.13 16.7402 15 12.0002 15C7.26015 15 3.41016 18.13 3.41016 22"
+                            stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Вхід
+                </a>
+            </nav>
         </div>
     </header>
 
