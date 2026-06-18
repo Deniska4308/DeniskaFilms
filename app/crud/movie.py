@@ -26,6 +26,20 @@ async def get_movie_by_id(db: AsyncSession, movie_id: int):
     )
     return result.scalars().first()
 
+async def get_movie_by_name(db: AsyncSession, movie_name:str):
+    """Бере фільм по назві аглійській"""
+    result = await db.execute(
+        select(Movie)
+        .options(
+            selectinload(Movie.actors),
+            selectinload(Movie.directors),
+            selectinload(Movie.countries),
+            selectinload(Movie.genres),
+            selectinload(Movie.dubbing)
+        ).where()
+    )
+    return
+
 async def get_movies_list(db: AsyncSession):
     """
     видає список фільмів

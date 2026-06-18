@@ -18,6 +18,9 @@ router = APIRouter(
 async def login(payload: UserCreate, response: Response,db: AsyncSession = Depends(get_db)):
     user = await get_user_by_username(db, payload.username)
 
+    if not user or not verify_password(payload.password, user.password_hash):
+        raise HTTPException(status_code=401, detail='bad credentials')
+
     token = create_access_token(subject=user.id, extra_clims={"role": user.role})
     response.set_cookie(
         key="access_token",
