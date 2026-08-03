@@ -36,16 +36,16 @@ async def get_movie_by_name(db: AsyncSession, movie_name:str):
             selectinload(Movie.countries),
             selectinload(Movie.genres),
             selectinload(Movie.dubbing)
-        ).where()
+        ).where(Movie.original_title == movie_name)
     )
     return
 
-async def get_movies_list(db: AsyncSession):
+async def get_movie_list(db: AsyncSession, skip, limit):
     """
-    видає список фільмів
+    видає список фільмів (тільки основна інформація без факторів і т.д.)
     """
     result = await db.execute(
-        select(Movie)
+        select(Movie).offset(skip).limit(limit)
     )
     return  result.scalars().all()
 

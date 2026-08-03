@@ -8,3 +8,4 @@ app/view/movies
 .env
 .env.*
 __pycache__/
+app/*.db

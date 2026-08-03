@@ -1,10 +1,10 @@
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Query
 from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.schemas.schemas import MovieDetail, ActorOut, ActorIn, Movie
 from app.database import get_db
-from app.crud.movie import get_movie_by_id, pos_actor, get_dubbing_byId, get_movies_list
+from app.crud.movie import get_movie_by_id, pos_actor, get_dubbing_byId, get_movie_list
 from app.utils.security import decode_jwt
 from sqlalchemy.exc import IntegrityError
 import os
@@ -45,9 +45,13 @@ async def view_movie(dubbing_id: int, request: Request, db: AsyncSession = Depen
     else:
         raise HTTPException(status_code=404, detail="not allowed")
 
-@router.get("/movies/list3", response_model=List[Movie])
-async def get_movie_list(db: AsyncSession = Depends(get_db)):
-    movielist = await get_movies_list(db)
-    for movie in movielist:
-        print(movie.title)
-    return movielist
+@router.get("/movielist", response_model=List[Movie])
+async def get_movies_list(skip: int = Query(0, ge=0),
+                         limit: int = Query(30, ge=1, le=120),
+                         db: AsyncSession = Depends(get_db)):
+        movies = await get_movie_list(db, skip, limit)
+
+        if not movies:
+            raise HTTPException(status_code=404, detail="Not Found")
+
+        return movies

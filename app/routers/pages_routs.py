@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Query
 from fastapi.responses import HTMLResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import templates
 from app.database import get_db
-from app.crud.movie import get_movie_by_id, get_dubbingFor_movie, get_movies_list
+from app.crud.movie import get_movie_by_id, get_dubbingFor_movie, get_movie_list
 from app.utils.webSite import movieDatetime, movieRuntime, movieStars
 from urllib.parse import urljoin
 from app.utils.security import decode_jwt, show_player
@@ -22,7 +22,7 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
     movieDay, movieMonth, movieYear = movieDatetime(movie.release_date)
     full_stars, has_halfStar = movieStars(movie.deniska_rating)
 
-    #можливо це треба перенести(це не риторика)
+    #можливо це треба перенести
     def get_start_dubbing(data):
         start_dubbung = None
         for dub in data.dubbing:
@@ -33,7 +33,8 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
         return start_dubbung
 
 
-    return templates.TemplateResponse("devmovie.html", {"request": request,
+    return templates.TemplateResponse("devmovie.html", {
+                                                     "request": request,
                                                      "title": movie.title,
                                                      "eng_title": movie.original_title,
                                                      "rating": movie.deniska_rating,
@@ -54,13 +55,6 @@ async def page_by_movie_id(movie_id: int, request: Request, db: AsyncSession = D
                                                      "dubbing": movie.dubbing,
                                                      "start_dub": get_start_dubbing(movie)
                                                      })
-
-@router.get("/oldmain", response_class=HTMLResponse)
-async def main(request: Request, db: AsyncSession = Depends(get_db)):
-    movielist = await get_movies_list(db)
-    return templates.TemplateResponse("main.html", {"request": request,
-                                                    "movielist": movielist
-                                                    })
 
 @router.get("/login", response_class=HTMLResponse)
 async def login(request: Request):
@@ -83,8 +77,11 @@ async def test(request: Request):
                                                     "show_player": show_player(request)})
 
 @router.get("/", response_class=HTMLResponse)
-async def mainpage(request: Request, db: AsyncSession = Depends(get_db)):
-     movielist = await get_movies_list(db)
+async def mainpage(request: Request,
+                   skip: int = Query(0, ge=0),
+                   limit: int = Query(30, ge=1, le=100),
+                   db: AsyncSession = Depends(get_db)):
+     movielist = await get_movie_list(db, skip, limit)
      return templates.TemplateResponse("devmain.html", {
         "request": request,
         "movielist": movielist

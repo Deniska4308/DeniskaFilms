@@ -1,195 +1,258 @@
-from sqlalchemy import Column, Integer, String, Date, DateTime, SmallInteger, Boolean, Table, ForeignKey, Text, text, func
-from sqlalchemy.orm import relationship
-from app.database import Base
-from datetime import date
+from __future__ import annotations
 
-#звʼязувальні таблиці
+from datetime import date, datetime
+from typing import Optional
+
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Date,
+    DateTime,
+    ForeignKey,
+    Integer,
+    SmallInteger,
+    String,
+    Table,
+    Text,
+    UniqueConstraint,
+    func,
+    text,
+)
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.database import Base
+
+
+# звʼязувальні таблиці
+
 movie_genre = Table(
     "moviegenre",
     Base.metadata,
     Column("movie_id", ForeignKey("movie.id", ondelete="CASCADE"), primary_key=True),
-    Column("genre_id", ForeignKey("genre.id", ondelete="CASCADE"), primary_key=True)
+    Column("genre_id", ForeignKey("genre.id", ondelete="CASCADE"), primary_key=True),
 )
 
 movie_actor = Table(
-    'movieactor',
+    "movieactor",
     Base.metadata,
-    Column('movie_id', ForeignKey('movie.id', ondelete="CASCADE"), primary_key=True),
-    Column('actor_id', ForeignKey('actor.id', ondelete='CASCADE'), primary_key=True)
+    Column("movie_id", ForeignKey("movie.id", ondelete="CASCADE"), primary_key=True),
+    Column("actor_id", ForeignKey("actor.id", ondelete="CASCADE"), primary_key=True),
 )
 
 movie_director = Table(
-    'moviedirector',
+    "moviedirector",
     Base.metadata,
-    Column('movie_id', ForeignKey('movie.id', ondelete="CASCADE"), primary_key=True),
-    Column('director_id', ForeignKey('director.id', ondelete="CASCADE"), primary_key=True)
+    Column("movie_id", ForeignKey("movie.id", ondelete="CASCADE"), primary_key=True),
+    Column("director_id", ForeignKey("director.id", ondelete="CASCADE"), primary_key=True),
 )
 
 movie_country = Table(
-    'moviecountry',
+    "moviecountry",
     Base.metadata,
-    Column('movie_id', ForeignKey('movie.id', ondelete="CASCADE"), primary_key=True),
-    Column('country_id', ForeignKey('country.id', ondelete="CASCADE"), primary_key=True)
+    Column("movie_id", ForeignKey("movie.id", ondelete="CASCADE"), primary_key=True),
+    Column("country_id", ForeignKey("country.id", ondelete="CASCADE"), primary_key=True),
 )
-# 11/10 таблиць
 
-#фільм
+
 class Movie(Base):
-    __tablename__ = 'movie'
+    __tablename__ = "movie"
 
-    id = Column(Integer, primary_key=True, index=True, nullable=False)
-    title = Column(String(64), index=True, unique=True, nullable=False)
-    original_title = Column(String(64), index=True, nullable=False)
-    description = Column(Text, nullable=True)
-    release_date = Column(Date, nullable=True)
-    runtime = Column(SmallInteger, nullable=True)
-    age_rating = Column(SmallInteger, nullable=False)
-    deniska_rating = Column(SmallInteger, nullable=False)
-    is_seria = Column(Boolean, nullable=False)
-    poster_url = Column(Text, nullable=True)
-    background_poster = Column(Text, nullable=True)
-    created_at = Column(Date, nullable=False, default=date.today)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    title: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    original_title: Mapped[str] = mapped_column(String(64), index=True)
+    description: Mapped[Optional[str]] = mapped_column(Text)
+    release_date: Mapped[Optional[date]] = mapped_column(Date)
+    runtime: Mapped[Optional[int]] = mapped_column(SmallInteger)
+    age_rating: Mapped[int] = mapped_column(SmallInteger)
+    deniska_rating: Mapped[int] = mapped_column(SmallInteger)
+    is_seria: Mapped[bool] = mapped_column(Boolean)
 
-    #звʼязки до фільмів   
-    # назва = relationship('назва_моделі(назва класу а не таблиці у sql)', secondary=Назва_звʼязувальної_таблиці, back_populates='нзва_протилежгого_звʼязка',lazy="...")
-    genres = relationship( 
-        'Genre',
+    poster_url: Mapped[Optional[str]] = mapped_column(Text)
+    background_poster: Mapped[Optional[str]] = mapped_column(Text)
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+    )
+
+    genres: Mapped[list[Genre]] = relationship(
         secondary=movie_genre,
-        back_populates='movies', #назва 'назва' = relationship(...) у класі Genre
-        lazy='selectin'
+        back_populates="movies",
+        lazy="selectin",
     )
 
-    actors = relationship(
-        'Actor',
+    actors: Mapped[list[Actor]] = relationship(
         secondary=movie_actor,
-        back_populates='movies',
-        lazy='selectin'
+        back_populates="movies",
+        lazy="selectin",
     )
 
-    directors = relationship(
-        'Director',
+    directors: Mapped[list[Director]] = relationship(
         secondary=movie_director,
-        back_populates='movies',
-        lazy='selectin'
+        back_populates="movies",
+        lazy="selectin",
     )
-    countries = relationship(
-        'Country',
+
+    countries: Mapped[list[Country]] = relationship(
         secondary=movie_country,
-        back_populates='movies',
-        lazy='selectin'
-    )
-    roles = relationship(
-        'Role',
-        back_populates='movies',
-        lazy='selectin'
+        back_populates="movies",
+        lazy="selectin",
     )
 
-    dubbing = relationship(
-        'Dubbing',
-        back_populates='movies',
-        lazy='selectin'
+    roles: Mapped[list[Role]] = relationship(
+        back_populates="movie",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+    dubbing: Mapped[list[Dubbing]] = relationship(
+        back_populates="movie",
+        cascade="all, delete-orphan",
+        lazy="selectin",
     )
 
 
-#жанри
 class Genre(Base):
-    __tablename__ = 'genre'
+    __tablename__ = "genre"
 
-    id = Column(Integer, primary_key=True, index=True, nullable=False)
-    name = Column(String(64), index=True, unique=True, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String(64), unique=True, index=True)
 
-    movies = relationship(
-        'Movie',
-        secondary=movie_genre, #така як у movie
-        back_populates='genres', #назва genres = relationship(...) у класі Movie
-        lazy='selectin'
+    movies: Mapped[list[Movie]] = relationship(
+        secondary=movie_genre,
+        back_populates="genres",
+        lazy="selectin",
     )
 
 
-#актори
 class Actor(Base):
-    __tablename__ = 'actor'
+    __tablename__ = "actor"
 
-    id = Column(Integer, primary_key=True, index=True, nullable=False)
-    name = Column(String(64), unique=True, index=True, nullable=False)
-    true_name = Column(String(64), index=True, nullable=False)
-    birth_date = Column(Date, index=True, nullable=True)
-    photo_url = Column(Text, nullable=True)
-    is_female = Column(Boolean, nullable=False, index=True)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    true_name: Mapped[str] = mapped_column(String(64), index=True)
+    birth_date: Mapped[Optional[date]] = mapped_column(Date, index=True)
+    photo_url: Mapped[Optional[str]] = mapped_column(Text)
+    is_female: Mapped[bool] = mapped_column(Boolean, index=True)
 
-    movies = relationship(
-        'Movie',
+    movies: Mapped[list[Movie]] = relationship(
         secondary=movie_actor,
-        back_populates='actors',
-        lazy='selectin'
+        back_populates="actors",
+        lazy="selectin",
     )
 
-#режисер
+    roles: Mapped[list[Role]] = relationship(
+        back_populates="actor",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
+
+
 class Director(Base):
-    __tablename__ = 'director'
+    __tablename__ = "director"
 
-    id = Column(Integer, primary_key=True, index=True, nullable=False)
-    name = Column(String(64), unique=True, index=True, nullable=False)
-    true_name = Column(String(64), index=True, nullable=False)
-    birth_date = Column(Date, index=True, nullable=True)
-    photo_url = Column(Text, nullable=True)
-    is_female = Column(Boolean, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    true_name: Mapped[str] = mapped_column(String(64), index=True)
+    birth_date: Mapped[Optional[date]] = mapped_column(Date, index=True)
+    photo_url: Mapped[Optional[str]] = mapped_column(Text)
+    is_female: Mapped[bool] = mapped_column(Boolean)
 
-    movies = relationship(
-        'Movie',
+    movies: Mapped[list[Movie]] = relationship(
         secondary=movie_director,
-        back_populates='directors',
-        lazy='selectin'
+        back_populates="directors",
+        lazy="selectin",
     )
+
 
 class Country(Base):
-    __tablename__ = 'country'
+    __tablename__ = "country"
 
-    id = Column(Integer, primary_key=True, index=True, nullable=False)
-    name = Column(String(64), index=True, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String(64), unique=True, index=True)
 
-    movies = relationship(
-        'Movie',
+    movies: Mapped[list[Movie]] = relationship(
         secondary=movie_country,
-        back_populates='countries',
-        lazy='selectin'
+        back_populates="countries",
+        lazy="selectin",
     )
 
+
 class Role(Base):
-    __tablename__ = 'role'
+    __tablename__ = "role"
 
-    id = Column(Integer, primary_key=True, index=True, nullable=False)
-    movie_id = Column(Integer, ForeignKey('movie.id', ondelete="CASCADE"))
-    actor_id = Column(Integer, ForeignKey('actor.id', ondelete="CASCADE"))
-    role_name = Column(String(64), nullable=False)
+    __table_args__ = (
+        UniqueConstraint(
+            "movie_id",
+            "actor_id",
+            "role_name",
+            name="uq_role_movie_actor_name",
+        ),
+    )
 
-    #Звяʼзки
-    movies = relationship('Movie', back_populates='roles')
-    actors = relationship('Actor', backref='roles')
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+
+    movie_id: Mapped[int] = mapped_column(
+        ForeignKey("movie.id", ondelete="CASCADE"),
+        index=True,
+    )
+
+    actor_id: Mapped[int] = mapped_column(
+        ForeignKey("actor.id", ondelete="CASCADE"),
+        index=True,
+    )
+
+    role_name: Mapped[str] = mapped_column(String(64))
+
+    movie: Mapped[Movie] = relationship(back_populates="roles")
+    actor: Mapped[Actor] = relationship(back_populates="roles")
 
 
 class Dubbing(Base):
-    __tablename__ = 'dubbing'
+    __tablename__ = "dubbing"
 
-    id = Column(Integer, nullable=False)
-    movie_id = Column(Integer, ForeignKey('movie.id', ondelete="CASCADE"), nullable=False, primary_key=True)
-    name = Column(String(64), nullable=False, primary_key=True)
-    dubble_lang = Column(String(8), nullable=False, index=True)
-    movie_url = Column(Text, nullable=True)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
 
-    movies = relationship(
-        'Movie',
-        back_populates='dubbing'
+    movie_id: Mapped[int] = mapped_column(
+        ForeignKey("movie.id", ondelete="CASCADE"),
+        index=True,
     )
 
-class User(Base):
-    __tablename__ = 'users'
+    name: Mapped[str] = mapped_column(String(64))
+    dubble_lang: Mapped[str] = mapped_column(String(8), index=True)
+    movie_url: Mapped[Optional[str]] = mapped_column(Text)
 
-    id = Column(Integer, nullable=False, primary_key=True, index=True)
-    username = Column(String(526), nullable=False, index=True)
-    role = Column(Text, nullable=False, server_default=text("'guest'"), default="guest")
-    email = Column(String(254), unique=True, nullable=True)
-    password_hash = Column(Text, nullable=False)
-    birth_date = Column(Date, nullable=True)
-    profile_img = Column(Text, nullable=True)
-    created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
+    movie: Mapped[Movie] = relationship(back_populates="dubbing")
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+
+    username: Mapped[str] = mapped_column(
+        String(526),
+        index=True,
+    )
+
+    role: Mapped[str] = mapped_column(
+        Text,
+        server_default=text("'guest'"),
+        default="guest",
+    )
+
+    email: Mapped[Optional[str]] = mapped_column(
+        String(254),
+        unique=True,
+        index=True,
+    )
+
+    password_hash: Mapped[str] = mapped_column(Text)
+
+    birth_date: Mapped[Optional[date]] = mapped_column(Date)
+    profile_img: Mapped[Optional[str]] = mapped_column(Text)
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+    )
