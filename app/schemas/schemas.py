@@ -13,6 +13,7 @@ class Movie(BaseModel):
     age_rating: int
     deniska_rating: int
     is_seria: bool
+    slug: str
     poster_url: Optional[str]
     background_poster: Optional[str]
     created_at: Optional[date]

@@ -26,8 +26,8 @@ async def get_movie_by_id(db: AsyncSession, movie_id: int):
     )
     return result.scalars().first()
 
-async def get_movie_by_name(db: AsyncSession, movie_name:str):
-    """Бере фільм по назві аглійській"""
+async def get_movie_by_slug(db: AsyncSession, movie_slug:str):
+    """Бере фільм по назві аглійській де пробіли заміняються на '-'"""
     result = await db.execute(
         select(Movie)
         .options(
@@ -36,9 +36,9 @@ async def get_movie_by_name(db: AsyncSession, movie_name:str):
             selectinload(Movie.countries),
             selectinload(Movie.genres),
             selectinload(Movie.dubbing)
-        ).where(Movie.original_title == movie_name)
+        ).where(Movie.slug == movie_slug)
     )
-    return
+    return result
 
 async def get_movie_list(db: AsyncSession, skip, limit):
     """
