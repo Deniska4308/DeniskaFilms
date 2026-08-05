@@ -66,7 +66,7 @@ class Movie(Base):
     age_rating: Mapped[int] = mapped_column(SmallInteger)
     deniska_rating: Mapped[int] = mapped_column(SmallInteger)
     is_seria: Mapped[bool] = mapped_column(Boolean)
-
+    slug: Mapped[str] = mapped_column(String)
     poster_url: Mapped[Optional[str]] = mapped_column(Text)
     background_poster: Mapped[Optional[str]] = mapped_column(Text)
 
