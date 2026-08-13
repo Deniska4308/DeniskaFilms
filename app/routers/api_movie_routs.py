@@ -30,9 +30,6 @@ async def get_movies_list(skip: int = Query(0, ge=0),
             raise HTTPException(status_code=404, detail="Not Found")
 
         return movies
-
-#видає файл по ід озвучки
-@router.get("/movie/view/{dubbing_id}")
 async def view_movie(dubbing_id: int, request: Request, db: AsyncSession = Depends(get_db)):
     #тут треба захистити
     user_cookie = decode_jwt(request) #тут треба ще звірку з базою

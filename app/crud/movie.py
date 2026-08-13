@@ -38,7 +38,7 @@ async def movie_by_slug(db: AsyncSession, movie_slug:str):
             selectinload(Movie.dubbing)
         ).where(Movie.slug == movie_slug)
     )
-    return result
+    return result.scalars().first()
 
 async def get_movie_list(db: AsyncSession, skip, limit):
     """
