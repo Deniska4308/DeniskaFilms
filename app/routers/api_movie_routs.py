@@ -4,7 +4,7 @@ from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.schemas.schemas import MovieDetail, Movie
 from app.database import get_db
-from app.crud.movie import get_movie_by_id, get_dubbing_byId, get_movie_list, get_movie_by_slug
+from app.crud.movie import get_movie_by_id, get_dubbing_byId, get_movie_list, movie_by_slug
 from app.utils.security import decode_jwt
 import os
 
@@ -14,8 +14,8 @@ router = APIRouter(
 )
 
 @router.get("/movie/{slug}", response_model=MovieDetail)
-async def get_movie_by_slug(slug: int, db: AsyncSession = Depends(get_db)):
-    movie_data = await get_movie_by_slug(db, slug)
+async def get_movie_by_slug(slug: str, db: AsyncSession = Depends(get_db)):
+    movie_data = await movie_by_slug(db, slug)
     if not  movie_data:
         raise HTTPException(status_code=404, detail="Movie not found(")
     return movie_data
